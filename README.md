@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gooty Frontend
 
-## Getting Started
+Next.jsフロントエンドアプリケーションです。
 
-First, run the development server:
+## 必要な環境
+
+- Docker
+- Docker Compose
+
+## セットアップ
+
+### Dockerコンテナの起動
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# コンテナのビルドと起動
+docker compose up --build
+
+# バックグラウンドで起動
+docker compose up -d --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 開発作業
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 開発サーバーの起動
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Dockerコンテナ内で開発サーバーを起動
+docker compose exec front npm run dev
 
-## Learn More
+# または、コンテナ起動時に自動で開発サーバーが起動します
+```
 
-To learn more about Next.js, take a look at the following resources:
+### その他の便利なコマンド
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# アプリケーションのビルド
+docker compose exec front npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# プロダクション用サーバーの起動
+docker compose exec front npm run start
 
-## Deploy on Vercel
+# ESLintによるコードチェック
+docker compose exec front npm run lint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Node.jsコンテナ内でシェルを起動
+docker compose exec front sh
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# ログの確認
+docker compose logs front
+
+# コンテナの停止
+docker compose down
+```
+
+## アクセス情報
+
+- フロントエンド: http://localhost:3001
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 15.5.4
+- **UI ライブラリ**: React 19.1.0
+- **言語**: TypeScript ^5
+- **スタイリング**: Tailwind CSS ^4
+- **リンター**: ESLint ^9
+- **パッケージマネージャー**: npm
+- **開発サーバー**: Turbopack（高速ビルド）
+
+## 開発時の注意事項
+
+- ホットリロードが有効になっているため、ファイルを編集すると自動的にブラウザが更新されます
+- `node_modules`はボリュームマウントから除外されているため、依存関係の変更時はコンテナを再ビルドしてください
