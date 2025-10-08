@@ -1,13 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 
 export default function IndexPage() {
   const [message, setMessage] = useState<string>('');
+  const router = useRouter();
 
   const handleButtonClick = () => {
     setMessage('Hello from /index page!');
+  };
+
+  const handleNavigateToRoot = () => {
+    router.push('/');
   };
 
   return (
@@ -27,6 +33,14 @@ export default function IndexPage() {
             className={styles.button}
           >
             Click Me!
+          </button>
+          
+          <button
+            onClick={handleNavigateToRoot}
+            className={styles.button}
+            style={{ backgroundColor: '#10b981', marginTop: '0.5rem' }}
+          >
+            Go to Home (/)
           </button>
           
           {message && (

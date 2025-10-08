@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [apiStatus, setApiStatus] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const checkApiHealth = async () => {
     setIsLoading(true);
@@ -17,6 +19,10 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleNavigateToIndex = () => {
+    router.push('/index');
   };
 
   return (
@@ -33,6 +39,13 @@ export default function Home() {
             className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded transition-colors"
           >
             {isLoading ? 'Checking...' : 'Check API Health'}
+          </button>
+          
+          <button
+            onClick={handleNavigateToIndex}
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
+            Go to /index
           </button>
           
           {apiStatus && (
