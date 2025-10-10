@@ -1,65 +1,10 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { fetchDemoShops, DemoShop } from '@/lib/api';
+import Link from 'next/link';
+import { fetchDemoShops } from '@/lib/api';
 import styles from './page.module.css';
 
-export default function DemoShopsPage() {
-  const [shops, setShops] = useState<DemoShop[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    const loadShops = async () => {
-      try {
-        const response = await fetchDemoShops();
-        setShops(response.data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load shops');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadShops();
-  }, []);
-
-  const handleShopClick = (id: number) => {
-    router.push(`/demo_shops/${id}`);
-  };
-
-  const handleBackToHome = () => {
-    router.push('/');
-  };
-
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.card}>
-          <h1 className={styles.title}>店舗一覧</h1>
-          <p className={styles.description}>読み込み中...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.card}>
-          <h1 className={styles.title}>店舗一覧</h1>
-          <div className={styles.errorContainer}>
-            <p className={styles.errorText}>エラー: {error}</p>
-          </div>
-          <button onClick={handleBackToHome} className={styles.button}>
-            ホームに戻る
-          </button>
-        </div>
-      </div>
-    );
-  }
+export default async function DemoShopsPage() {
+  const response = await fetchDemoShops();
+  const shops = response.data;
 
   return (
     <div className={styles.container}>
@@ -71,10 +16,10 @@ export default function DemoShopsPage() {
         
         <div className={styles.shopsList}>
           {shops.map((shop) => (
-            <div
+            <Link
               key={shop.id}
+              href={`/demo_shops/${shop.id}`}
               className={styles.shopCard}
-              onClick={() => handleShopClick(shop.id)}
             >
               <div className={styles.shopHeader}>
                 <h3 className={styles.shopName}>{shop.name}</h3>
@@ -86,13 +31,13 @@ export default function DemoShopsPage() {
                   ⭐ {shop.review_level.toFixed(1)}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         
-        <button onClick={handleBackToHome} className={styles.button}>
+        <Link href="/" className={styles.button}>
           ホームに戻る
-        </button>
+        </Link>
       </div>
     </div>
   );
