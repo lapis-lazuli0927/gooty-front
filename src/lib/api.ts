@@ -1,5 +1,10 @@
 // APIクライアント関数
-const API_BASE_URL = 'http://localhost:3002';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3002';
+
+// デバッグ用：環境変数の確認
+console.log('Environment:', process.env.NODE_ENV);
+console.log('API_BASE_URL:', API_BASE_URL);
+console.log('NEXT_PUBLIC_API_BASE_URL:', process.env.NEXT_PUBLIC_API_BASE_URL);
 
 export interface DemoShop {
   id: number;
