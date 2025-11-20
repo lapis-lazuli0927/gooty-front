@@ -29,6 +29,10 @@ export default function Home() {
     router.push('/demo_shops');
   };
 
+  const handleNavigateToStardusts = () => {
+    router.push('/stardusts');
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
@@ -57,6 +61,13 @@ export default function Home() {
             className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-colors"
           >
             Go to Demo Shops
+          </button>
+          
+          <button
+            onClick={handleNavigateToStardusts}
+            className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
+            Go to Stardusts
           </button>
           
           {apiStatus && (
