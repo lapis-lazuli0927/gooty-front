@@ -41,3 +41,24 @@ export async function fetchDemoShop(id: number): Promise<DemoShopResponse> {
   }
   return response.json();
 }
+
+export interface Stardust {
+  id: number;
+  value: number;
+  memo: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface StardustsResponse {
+  data: Stardust[];
+}
+
+// 全stardusts一覧を取得
+export async function fetchStardusts(): Promise<StardustsResponse> {
+  const response = await fetch(`${API_BASE_URL}/stardusts`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch stardusts');
+  }
+  return response.json();
+}
