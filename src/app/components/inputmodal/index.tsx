@@ -9,7 +9,7 @@ export default function InputModal({ close }: InputModalProps) {
   return (
     <div className={styles.modal} onClick={close}>
       <div className={styles.modal_content}>
-        <img src="assets/icons/input_modal.svg" />
+        <img src="/icons/input-modal.svg" />
         <div className={styles.modal_text_btn}>
           <h2>お店の新規登録</h2>
           <div className={styles.modal_text}>
@@ -22,9 +22,9 @@ export default function InputModal({ close }: InputModalProps) {
               <span>手動入力</span>なら、お店の情報を手動で記録できます
             </p>
           </div>
-          <div className="add_btn">
+          <div className={styles.add_btn}>
             <h3
-              className="AI_btn"
+              className={styles.AI_btn}
               onClick={() => {
                 alert("AI登録");
               }}
@@ -32,7 +32,7 @@ export default function InputModal({ close }: InputModalProps) {
               AI登録
             </h3>
             <h3
-              className="hand_btn"
+              className={styles.hand_btn}
               onClick={() => {
                 alert("手動登録");
               }}
