@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { fetchShops, Shops } from "@/lib/api";
+import ShopCard from "@/app/components/ShopCard";
 import styles from "./page.module.css";
 
 export default function ShopsPage() {
@@ -44,6 +45,12 @@ export default function ShopsPage() {
         </div>
       </div>
       <div className={styles.shop_card_container}>
+
+
+       {shops.map((shop) => (
+        <ShopCard key={shop.id} shop={shop} />
+       ))}
+          
         <div className={styles.shop_card}>
           <div className={styles.shop_accent_border}></div>
           <div className={styles.shop_content}>
