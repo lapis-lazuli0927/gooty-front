@@ -1,5 +1,33 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { fetchShops, Shops } from "@/lib/api";
 import styles from "./page.module.css";
+
 export default function ShopsPage() {
+  const [shops, setShops] = useState<Shops[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const loadShops = async () => {
+      try {
+        const response = await fetchShops();
+        setShops(response.data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load shops");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadShops();
+  }, []);
+
+
+
   return (
     <div>
       <div className={styles.header_container}>
