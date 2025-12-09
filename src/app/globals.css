@@ -40,8 +40,6 @@ body {
   background-image: url("../../public/images/smart_phone_background.png");
   background-size: cover;
   background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
 }
 
 h1 {

@@ -27,10 +27,8 @@ export default function ShopsPage() {
     loadShops();
   }, []);
 
-
-
   return (
-    <div>
+    <div className={styles.shop_index_page_container}>
       <div className={styles.header_container}>
         <div className={styles.header}>
           <h1 className={styles.header_logo}>Gooty</h1>
@@ -45,11 +43,9 @@ export default function ShopsPage() {
         </div>
       </div>
       <div className={styles.shop_card_container}>
-
-       {shops.map((shop) => (
-        <ShopCard key={shop.id} shop={shop} />
-       ))}
-
+        {shops.map((shop) => (
+          <ShopCard key={shop.id} shop={shop} />
+        ))}
       </div>
       <div className={styles.footer}>
         <div className={styles.add_shop_btn}>
