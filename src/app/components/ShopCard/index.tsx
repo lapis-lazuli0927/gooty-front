@@ -11,14 +11,27 @@ export default function ShopCard({ shop }: ShopCardProps) {
   return (
     <div>
       <div className={styles.shop_card}>
-        <div className={styles.shop_accent_border}></div>
         <div className={styles.shop_content}>
-          <div className={styles.shop_Instagram_icon}>
-            <img
-              src="/icons/shop_Instagram_icon.svg"
-              alt="Instagramのアイコン"
-            />
-          </div>
+          {shop.is_ai_generated ? (
+            <div className={styles.shop_accent_border}></div>
+          ) : (
+            <div className={styles.shop_non_accent_border}></div>
+          )}
+          {shop.is_instagram ? (
+            <div className={styles.shop_Instagram_icon}>
+              <img
+                src="/icons/shop_Instagram_icon.svg"
+                alt="Instagramのアイコン"
+              />
+            </div>
+          ) : (
+            <div className={styles.shop_non_Instagram_icon}>
+              <img
+                src="/icons/shop_non_Instagram_icon.svg"
+                alt="手動入力のアイコン"
+              />
+            </div>
+          )}
           <div className={styles.shop_name}>
             <p className={styles.shop_text}>{shop.name}</p>
             <div className={styles.shop_train}>

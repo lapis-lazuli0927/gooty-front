@@ -20,15 +20,28 @@
   border-radius: 6px 0px 0px 6px;
 }
 
+.shop_non_accent_border {
+  width: 6px;
+  height: 69px;
+  background: #fff;
+  border-radius: 6px 0px 0px 6px;
+}
+
 .shop_content {
   display: flex;
   flex: 1;
   height: 69px;
   background-color: #fff;
-  border-radius: 0px 6px 6px 0px;
+  border-radius: 6px;
 }
 
 .shop_Instagram_icon {
+  width: 45px;
+  height: 45px;
+  margin: 12px 0 0 24px;
+}
+
+.shop_non_Instagram_icon {
   width: 45px;
   height: 45px;
   margin: 12px 0 0 24px;
