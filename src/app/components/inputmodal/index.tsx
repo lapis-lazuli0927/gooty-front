@@ -1,11 +1,17 @@
 import { useState } from "react";
 import styles from "./index.module.css";
+import { useRouter } from "next/navigation";
 
 interface InputModalProps {
   close: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function InputModal({ close }: InputModalProps) {
+  const router = useRouter();
+  const handleManualRegister = () => {
+    // 新規登録ページへ遷移する
+    router.push("/create");
+  };
   return (
     <div className={styles.modal} onClick={close}>
       <div className={styles.modal_content}>
@@ -31,12 +37,7 @@ export default function InputModal({ close }: InputModalProps) {
             >
               AI登録
             </h3>
-            <h3
-              className={styles.hand_btn}
-              onClick={() => {
-                alert("手動登録");
-              }}
-            >
+            <h3 className={styles.hand_btn} onClick={handleManualRegister}>
               手動登録
             </h3>
           </div>
