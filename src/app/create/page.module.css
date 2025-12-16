@@ -16,6 +16,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.contact_message_error {
+  color:  #fff;
+  font-size: 8px;
+}
+
+input:focus {
+  outline: none;
+}
+
 /* 新規登録欄 */
 .form_container {
   display: flex;
