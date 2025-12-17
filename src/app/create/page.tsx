@@ -66,7 +66,11 @@ export default function Create() {
         <h1>Gooty</h1>
       </div>
 
-      <form className={styles.form_container} onSubmit={handleSubmit}>
+      <form
+        className={styles.form_container}
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
         <div className={styles.tag}>
           <div className={styles.label_group}>
             <label htmlFor="shop-name">お店の名前</label>
@@ -172,7 +176,7 @@ export default function Create() {
         </div>
 
         <div className={styles.input_btn}>
-          <input type="submit" value="保存" />
+          <input className={styles.submit_button} type="submit" value="保存" />
         </div>
       </form>
     </div>

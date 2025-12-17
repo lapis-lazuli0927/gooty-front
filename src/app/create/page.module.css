@@ -12,18 +12,29 @@
   font-weight: normal;
 }
 .new_shop_page_container {
-  min-height: 100vh;
+  box-sizing: inherit;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .contact_message_error {
-  color:  #fff;
-  font-size: 8px;
+  color: #fff;
+  font-size: 14px;
 }
 
-input:focus {
+.tag input:focus,
+.tag textarea:focus {
   outline: none;
+  background-color: #fff;
+  border: 3px solid #70c8ea;
+}
+
+.tag input:not(:placeholder-shown),
+.tag textarea:not(:placeholder-shown) {
+  outline: none;
+  background-color: #fff;
 }
 
 /* 新規登録欄 */
@@ -60,29 +71,25 @@ input:focus {
 }
 
 .tag input {
-  background-color: rgba(255, 255, 255, 0.77);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid #0099ff;
+  background-color: rgba(255, 255, 255, 0.5);
+  outline: none;
   border-radius: 3px;
   height: 4.35vh;
   box-sizing: border-box;
   font-size: 3.23vw;
+  padding: 10px;
 }
 
 /* メモ欄 */
 
 .tag textarea {
-  background-color: rgba(255, 255, 255, 0.77);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid #0099ff;
+  background-color: rgba(255, 255, 255, 0.5);
+  outline: none;
   border-radius: 3px;
   height: 13.16vh;
   box-sizing: border-box;
   font-size: 3.23vw;
+  padding: 10px;
 }
 
 /* レビュー欄 */
@@ -104,7 +111,7 @@ input:focus {
   text-align: center;
 }
 
-.input_btn input[type="submit"] {
+.submit_button {
   border: none;
   width: 28.36vw;
   height: 6.18vh;
@@ -113,4 +120,5 @@ input:focus {
   background-color: #e28888;
   font-weight: 600;
   border-radius: 15px;
+  box-shadow: 2px 2px 3px #724545;
 }
