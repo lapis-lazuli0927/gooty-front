@@ -43,6 +43,7 @@ export default function Create() {
         ...prevData,
         [name]: value,
       }));
+      if (name === "name" && value.trim()) setNameError(false);
     },
     []
   );
@@ -103,6 +104,7 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
             name="name"
             value={shopData.name}
             onChange={handleChange}
+            style={nameError ? { border: "2px solid #D61313", backgroundColor: "#FCDADA" } : {}}
             placeholder="例）お店の名前"
           />
           {nameError && (
