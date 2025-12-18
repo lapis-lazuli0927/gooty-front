@@ -50,6 +50,23 @@ export interface ShopsResponse {
   success: boolean;
 }
 
+/** Create関連の型 */
+export interface ShopCreateRequest {
+  name: string;
+  url: string;
+  station_name: string;
+  address: string;
+  tel: string;
+  memo: string;
+  review: number;
+  is_instagram: boolean;
+  is_ai_generated: boolean;
+}
+
+export interface CreateResponse {
+  success: boolean;
+}
+
 /** Stardust関連の型 */
 export interface Stardust {
   id: number;
@@ -109,4 +126,23 @@ export async function fetchStardusts(): Promise<StardustsResponse> {
     throw new Error("Failed to fetch stardusts");
   }
   return response.json();
+}
+
+/**
+ * お店の新規登録
+ */
+export async function createShop(
+  newShopData: ShopCreateRequest
+): Promise<CreateResponse> {
+  const response = await fetch(`${API_BASE_URL}/shops`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newShopData),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to create shop");
+  }
+  return await response.json();
 }
