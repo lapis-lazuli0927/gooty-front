@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { ShopCreateRequest, createShop } from "@/lib/api";
 import styles from "./page.module.css";
 
 const MAX_STARS = 5;
@@ -31,6 +32,9 @@ export default function Create() {
     is_instagram: false,
     is_ai_generated: false,
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [nameError, setNameError] = useState(false);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -52,13 +56,29 @@ export default function Create() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const apiEndpoint = "http://localhost:3002/shops";
-
-    const dataToSend: ShopData = shopData;
-    console.log("送信データ:", dataToSend);
+    if (!shopData.name.trim()) {
+      setNameError(true);
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await createShop(shopData);
+      if (response.success) {
+        router.push("/shops");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load shops");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const shopNameError = useState(false);
+const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+  }
+};
 
   return (
     <div className={styles.new_shop_page_container}>
@@ -69,6 +89,7 @@ export default function Create() {
       <form
         className={styles.form_container}
         onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
         autoComplete="off"
       >
         <div className={styles.tag}>
@@ -84,7 +105,7 @@ export default function Create() {
             onChange={handleChange}
             placeholder="例）お店の名前"
           />
-          {shopNameError && (
+          {nameError && (
             <p className={styles.contact_message_error}>
               お店の名前は必須項目です。
             </p>
