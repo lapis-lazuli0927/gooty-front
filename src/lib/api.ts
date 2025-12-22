@@ -42,6 +42,11 @@ export interface ShopsResponse {
   success: boolean;
 }
 
+export interface ShopResponse {
+  data: Shops[];
+  success: boolean;
+}
+
 // 全店舗一覧を取得
 export async function fetchDemoShops(): Promise<DemoShopsResponse> {
   const response = await fetch(`${API_BASE_URL}/demo_shops`);
@@ -85,6 +90,15 @@ export async function fetchStardusts(): Promise<StardustsResponse> {
   const response = await fetch(`${API_BASE_URL}/stardusts`);
   if (!response.ok) {
     throw new Error("Failed to fetch stardusts");
+  }
+  return response.json();
+}
+
+
+export async function fetchShop(id: string): Promise<ShopResponse> {
+  const response = await fetch(`${API_BASE_URL}/shops/${id}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch shop");
   }
   return response.json();
 }
