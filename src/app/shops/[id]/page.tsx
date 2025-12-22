@@ -1,11 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { fetchShops, Shops } from "@/lib/api";
+import { useRouter, useParams } from "next/navigation";
+import { fetchShop, Shops } from "@/lib/api";
 import styles from "./page.module.css";
 
 export default function ShopsPage() {
+  const [shop, setShop] = useState<Shops | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const params = useParams();
+  const id = params?.id ? Number(params.id) : null;
+
+  useEffect(() => {
+    if (!id) {
+      setError("Invalid shop ID");
+      setLoading(false);
+      return;
+    }
+
+    const loadShop = async () => {
+      try {
+        const response = await fetchShop(String(id));
+        setShop(response.data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load shop");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadShop();
+  }, [id]);
+
   return (
     <div className={styles.show_body}>
       <div className={styles.header_container}>

@@ -38,6 +38,10 @@ export default function ShopsPage() {
     }
   };
 
+  const handleCardClick = (id: number) => {
+    router.push(`/shops/${id}`);
+  };
+  
   return (
     <div className={styles.shop_index_page_container}>
       {isModalOpen && <InputModal close={closeModal} />}
@@ -56,7 +60,12 @@ export default function ShopsPage() {
       </div>
       <div className={styles.shop_card_container}>
         {shops.map((shop) => (
-          <ShopCard key={shop.id} shop={shop} />
+          <div
+            key={shop.id} 
+            onClick={() => handleCardClick(shop.id)}>
+
+            <ShopCard shop={shop} />
+            </div>
         ))}
       </div>
       <div className={styles.footer}>
