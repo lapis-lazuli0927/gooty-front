@@ -154,9 +154,8 @@ export async function createShop(
     },
     body: JSON.stringify(newShopData),
   });
-  const result = await response.json();
   if (!response.ok) {
-    throw new Error(result.error || "お店の登録に失敗しました");
+    throw new Error("Failed to create shop");
   }
-  return result;
+  return await response.json();
 }
