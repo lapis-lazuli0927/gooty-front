@@ -1,0 +1,13 @@
+/* エラーメッセージ */
+.global_error_container {
+  background-color: #e04f4f;
+  color: #fff;
+  height: 5vh;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
