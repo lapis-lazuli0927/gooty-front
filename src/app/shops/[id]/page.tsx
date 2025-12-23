@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { fetchShop, Shops } from "@/lib/api";
+import { fetchShop, Shop } from "@/lib/api";
 import styles from "./page.module.css";
 
 export default function ShopsPage() {
-  const [shop, setShop] = useState<Shops | null>(null);
+  const [shop, setShop] = useState<Shop | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -34,6 +34,19 @@ export default function ShopsPage() {
     loadShop();
   }, [id]);
 
+  if (loading) {
+    return <div className={styles.loading}>読み込み中...</div>;
+  }
+  if (error) {
+    return <div className={styles.error}>エラー発生：{error}</div>;
+  }
+  if (!shop) {
+    return <div className={styles.error}>お店のデータが見つかりません</div>;
+  }
+
+  const MAX_STARS = 5;
+  const currentLevel = shop.review !== null ? shop.review : 0;
+
   return (
     <div className={styles.show_body}>
       <div className={styles.header_container}>
@@ -43,7 +56,7 @@ export default function ShopsPage() {
       </div>
       <div className={styles.shop_title}>
         <div className={styles.shop_name}>
-          <p>switch</p>
+          <p>{shop.name}</p>
         </div>
         <div className={styles.shop_line}></div>
         <div className={styles.shop_Instagram_icon}>
@@ -60,7 +73,7 @@ export default function ShopsPage() {
             src="/icons/train_icon.svg"
             alt="駅のアイコン"
           />
-          <p>武蔵小金井駅</p>
+          <p>{shop.station_name}</p>
         </div>
         <div className={styles.map}>
           <img
@@ -68,7 +81,7 @@ export default function ShopsPage() {
             src="/icons/map_icon.svg"
             alt="マップのアイコン"
           />
-          <p>東京都小金井市本町5-18-15</p>
+          <p>{shop.address}</p>
         </div>
         <div className={styles.phone}>
           <img
@@ -76,7 +89,7 @@ export default function ShopsPage() {
             src="/icons/phone_icon.svg"
             alt="電話のアイコン"
           />
-          <p>042-201-1478</p>
+          <p>{shop.tel}</p>
         </div>
       </div>
       <div className={styles.memo}>
@@ -97,38 +110,28 @@ export default function ShopsPage() {
         </div>
       </div>
       <div className={styles.memo_text}>
-        <p>
-          ワインに精通したソムリエがいて、好みに合わせてワインを選んでくれます。日替わりで20種類のグラスワインが用意されており、気軽に色々な種類を楽しめます。
-        </p>
+        <p>{shop.memo}</p>
       </div>
       <div className={styles.review}>
         <p className={styles.review_title}>review</p>
         <div className={styles.review_star}>
-          <img
-            className={styles.review_star_icon}
-            src="/icons/review_star_show.svg"
-            alt="/"
-          />
-          <img
-            className={styles.review_star_icon}
-            src="/icons/review_star_show.svg"
-            alt="/"
-          />
-          <img
-            className={styles.review_star_icon}
-            src="/icons/review_star_show.svg"
-            alt="/"
-          />
-          <img
-            className={styles.review_star_icon}
-            src="/icons/review_star_show.svg"
-            alt="/"
-          />
-          <img
-            className={styles.review_star_icon}
-            src="/icons/review_star_show.svg"
-            alt="/"
-          />
+          {[...Array(MAX_STARS)].map((_, index) => {
+            const starNumber = index + 1;
+            // 塗りつぶすかどうかの判定: starNumberが currentLevel以下なら true
+            const isFilled = starNumber <= currentLevel;
+            return (
+              <img
+                key={index}
+                className={styles.review_star_icon}
+                src={
+                  isFilled
+                    ? "/icons/review_star_show.svg" // 黄色い星 (塗りつぶし)
+                    : "/icons/review_star_show_empty.svg" // 無色の星 (空)
+                }
+                alt={`評価星 ${starNumber} (${isFilled ? "満点" : "空"})`}
+              />
+            );
+          })}
         </div>
       </div>
       <div className={styles.edit_trash_btn}>

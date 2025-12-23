@@ -50,8 +50,20 @@ export interface ShopsResponse {
   success: boolean;
 }
 
+/** Shop関連の型 */
+export interface Shop {
+  id: number;
+  name: string;
+  station_name: string;
+  address: string;
+  tel: string;
+  memo: string;
+  review: number;
+  is_instagram: boolean;
+}
+
 export interface ShopResponse {
-  data: Shops[];
+  data: Shop;
   success: boolean;
 }
 
