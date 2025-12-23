@@ -4,6 +4,7 @@ import React, { useState, useCallback, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ShopCreateRequest, createShop } from "@/lib/api";
 import styles from "./page.module.css";
+import GlobalError from "@/app/components/GlobalError";
 
 const MAX_STARS = 5;
 
@@ -63,19 +64,7 @@ export default function Create() {
     }
     setLoading(true);
     setError(null);
-    // --- 検証用：ここから ---
-    // 本物の createShop を呼ばずに、わざとエラーを発生させる
-    setTimeout(() => {
-      // 400エラーのメッセージを試したい場合
-      setError("お店の名前は必須項目です。（検証用エラー）");
 
-      // 500エラーのメッセージを試したい場合
-      // setError("Internal server error（検証用エラー）");
-
-      setLoading(false);
-    }, 500);
-    return;
-    // --- 検証用：ここまで ---
     try {
       const response = await createShop(shopData);
       if (response.success) {
@@ -96,7 +85,7 @@ export default function Create() {
 
   return (
     <div className={styles.new_shop_page_container}>
-      {error && <div className={styles.global_error_container}>{error}</div>}
+      <GlobalError message={error} />
       <div className={styles.header}>
         <h1>Gooty</h1>
       </div>
