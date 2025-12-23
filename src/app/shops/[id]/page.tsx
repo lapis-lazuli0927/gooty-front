@@ -61,8 +61,12 @@ export default function ShopsPage() {
         <div className={styles.shop_line}></div>
         <div className={styles.shop_Instagram_icon}>
           <img
-            src="/icons/shop_Instagram_icon_show.svg"
-            alt="Instagramのアイコン"
+            src={
+              shop.is_instagram
+                ? "/icons/shop_Instagram_icon_show.svg"
+                : "/icons/shop_non_Instagram_icon.svg"
+            }
+            alt={shop.is_instagram ? "Instagramあり" : "Instagramなし"}
           />
         </div>
       </div>
