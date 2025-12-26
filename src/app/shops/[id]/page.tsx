@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { fetchShop, Shop } from "@/lib/api";
 import styles from "./page.module.css";
+import GlobalError from "@/app/components/GlobalError";
 
 export default function ShopsPage() {
   const [shop, setShop] = useState<Shop | null>(null);
@@ -14,12 +15,6 @@ export default function ShopsPage() {
   const id = params?.id ? Number(params.id) : null;
 
   useEffect(() => {
-    if (!id) {
-      setError("Invalid shop ID");
-      setLoading(false);
-      return;
-    }
-
     const loadShop = async () => {
       try {
         const response = await fetchShop(String(id));
@@ -30,18 +25,14 @@ export default function ShopsPage() {
         setLoading(false);
       }
     };
-
     loadShop();
   }, [id]);
 
   if (loading) {
-    return <div className={styles.loading}>読み込み中...</div>;
+    return;
   }
-  if (error) {
-    return <div className={styles.error}>エラー発生：{error}</div>;
-  }
-  if (!shop) {
-    return <div className={styles.error}>お店のデータが見つかりません</div>;
+  if (!shop || error) {
+    return <GlobalError message={error} />;
   }
 
   const MAX_STARS = 5;
