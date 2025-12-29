@@ -52,12 +52,12 @@ export interface ShopsResponse {
 
 /** Create関連の型 */
 export interface ShopCreateRequest {
-  name: string;
-  url: string;
-  station_name: string;
-  address: string;
-  tel: string;
-  memo: string;
+  name: string | null;
+  url: string | null;
+  station_name: string | null;
+  address: string | null;
+  tel: string | null;
+  memo: string | null;
   review: number;
   is_instagram: boolean;
   is_ai_generated: boolean;
