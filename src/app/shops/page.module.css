@@ -41,6 +41,13 @@
   height: 17px;
 }
 
+.content_wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
 .shop_card_container {
   overflow: scroll;
   -ms-overflow-style: none;
@@ -54,6 +61,18 @@
   display: none;
 }
 
+.shop_detail_container {
+  display: none;
+}
+
+.loading,
+.empty_detail {
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+
 .footer {
   padding: 16px;
 }
@@ -61,4 +80,31 @@
 .add_shop_btn {
   display: flex;
   justify-content: center;
+}
+
+/* PC用のスタイル（768px以上） */
+@media (min-width: 768px) {
+  .content_wrapper {
+    flex-direction: row;
+  }
+
+  .shop_card_container {
+    width: 50%;
+    max-width: 50%;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .shop_detail_container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 50%;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .shop_detail_container::-webkit-scrollbar {
+    display: none;
+  }
 }
