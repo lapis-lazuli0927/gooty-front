@@ -15,7 +15,7 @@ export default function InputModal({ close }: InputModalProps) {
   return (
     <div className={styles.modal} onClick={close}>
       <div className={styles.modal_content}>
-        <img src="/icons/input-modal.svg" />
+        <img src="/icons/input_modal.svg" />
         <div className={styles.modal_text_btn}>
           <h2>お店の新規登録</h2>
           <div className={styles.modal_text}>
