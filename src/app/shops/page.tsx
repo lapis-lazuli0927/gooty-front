@@ -2,17 +2,37 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { fetchShops, Shops } from "@/lib/api";
+import { fetchShops, Shops, fetchShop, Shop } from "@/lib/api";
 import ShopCard from "@/app/components/ShopCard";
+import ShopDetail from "@/app/components/ShopDetail";
 import InputModal from "@/app/components/inputmodal";
+import GlobalError from "@/app/components/GlobalError";
 import styles from "./page.module.css";
 
 export default function ShopsPage() {
   const [shops, setShops] = useState<Shops[]>([]);
+  const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
+  const [selectedShopId, setSelectedShopId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [detailLoading, setDetailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    // 画面サイズの判定
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
 
   useEffect(() => {
     const loadShops = async () => {
@@ -29,6 +49,26 @@ export default function ShopsPage() {
     loadShops();
   }, []);
 
+  useEffect(() => {
+    const loadSelectedShop = async () => {
+      if (selectedShopId) {
+        setDetailLoading(true);
+        try {
+          const response = await fetchShop(String(selectedShopId));
+          setSelectedShop(response.data);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Failed to load shop");
+        } finally {
+          setDetailLoading(false);
+        }
+      } else {
+        setSelectedShop(null);
+      }
+    };
+
+    loadSelectedShop();
+  }, [selectedShopId]);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -39,7 +79,13 @@ export default function ShopsPage() {
   };
 
   const handleCardClick = (id: number) => {
-    router.push(`/shops/${id}`);
+    if (isMobile) {
+      // スマホの場合は別ページに遷移
+      router.push(`/shops/${id}`);
+    } else {
+      // PCの場合はstateで詳細を表示（URLは変更しない）
+      setSelectedShopId(id);
+    }
   };
   
   return (
@@ -58,15 +104,26 @@ export default function ShopsPage() {
           />
         </div>
       </div>
-      <div className={styles.shop_card_container}>
-        {shops.map((shop) => (
-          <div
-            key={shop.id} 
-            onClick={() => handleCardClick(shop.id)}>
+      <div className={styles.content_wrapper}>
+        <div className={styles.shop_card_container}>
+          {shops.map((shop) => (
+            <div
+              key={shop.id} 
+              onClick={() => handleCardClick(shop.id)}>
 
-            <ShopCard shop={shop} />
-            </div>
-        ))}
+              <ShopCard shop={shop} />
+              </div>
+          ))}
+        </div>
+        <div className={styles.shop_detail_container}>
+          {detailLoading ? (
+            <div className={styles.loading}>読み込み中...</div>
+          ) : selectedShop ? (
+            <ShopDetail shop={selectedShop} />
+          ) : (
+            <div className={styles.empty_detail}>ショップを選択してください</div>
+          )}
+        </div>
       </div>
       <div className={styles.footer}>
         <div className={styles.add_shop_btn}>
