@@ -8,13 +8,16 @@ import GlobalError from "@/app/components/GlobalError";
 
 const MAX_STARS = 5;
 
+// nullを空文字列に変換するヘルパー関数
+const nullToEmpty = (value: string | null): string => value ?? "";
+
 interface ShopData {
-  name: string;
-  url: string;
-  station_name: string;
-  address: string;
-  tel: string;
-  memo: string;
+  name: string | null;
+  url: string | null;
+  station_name: string | null;
+  address: string | null;
+  tel: string | null;
+  memo: string | null;
   review: number;
   is_instagram: boolean;
   is_ai_generated: boolean;
@@ -23,12 +26,12 @@ interface ShopData {
 export default function Create() {
   const router = useRouter();
   const [shopData, setShopData] = useState<ShopData>({
-    name: "",
-    url: "",
-    station_name: "",
-    address: "",
-    tel: "",
-    memo: "",
+    name: null,
+    url: null,
+    station_name: null,
+    address: null,
+    tel: null,
+    memo: null,
     review: 0,
     is_instagram: false,
     is_ai_generated: false,
@@ -58,7 +61,7 @@ export default function Create() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!shopData.name.trim()) {
+    if (!shopData.name || !shopData.name.trim()) {
       setNameError(true);
       return;
     }
@@ -104,7 +107,7 @@ export default function Create() {
             type="text"
             id="shop-name"
             name="name"
-            value={shopData.name}
+            value={nullToEmpty(shopData.name)}
             onChange={handleChange}
             style={
               nameError
@@ -126,7 +129,7 @@ export default function Create() {
             type="url"
             id="shop-url"
             name="url"
-            value={shopData.url}
+            value={nullToEmpty(shopData.url)}
             onChange={handleChange}
             placeholder="例）https://www.instagram.com/"
           />
@@ -138,7 +141,7 @@ export default function Create() {
             type="text"
             id="shop-train"
             name="station_name"
-            value={shopData.station_name}
+            value={nullToEmpty(shopData.station_name)}
             onChange={handleChange}
             placeholder="例）武蔵小金井駅"
           />
@@ -150,7 +153,7 @@ export default function Create() {
             type="text"
             id="shop-address"
             name="address"
-            value={shopData.address}
+            value={nullToEmpty(shopData.address)}
             onChange={handleChange}
             placeholder="例）東京都小金井市本町5-18-15"
           />
@@ -162,7 +165,7 @@ export default function Create() {
             type="tel"
             id="shop-phone"
             name="tel"
-            value={shopData.tel}
+            value={nullToEmpty(shopData.tel)}
             onChange={handleChange}
             placeholder="例）090-5309-0441"
           />
@@ -174,7 +177,7 @@ export default function Create() {
             id="shop-memo"
             name="memo"
             rows={5}
-            value={shopData.memo}
+            value={nullToEmpty(shopData.memo)}
             onChange={handleChange}
             placeholder="自由にメモを記入できます"
           />

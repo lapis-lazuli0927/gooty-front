@@ -40,7 +40,9 @@ export default function ShopCard({ shop }: ShopCardProps) {
                 src="/icons/shop_train_icon.svg"
                 alt="/"
               />
-              <p className={styles.shop_train_text}>{shop.station_name}</p>
+              <p className={styles.shop_train_text}>
+                {shop.station_name ?? "駅情報未登録"}
+              </p>
             </div>
           </div>
           <div className={styles.review}>
