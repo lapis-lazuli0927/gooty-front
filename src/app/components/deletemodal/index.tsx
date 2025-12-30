@@ -18,7 +18,7 @@ export default function DeleteModal({ id, close }: DeleteModalProps) {
     try {
       await deleteShop(String(id));
     } finally {
-      router.push("/shops");
+      window.location.href = "/shops";
     }
   };
   return (
