@@ -22,7 +22,7 @@ export default function DeleteModal({ id, close }: DeleteModalProps) {
     }
   };
   return (
-    <div className={styles.modal} onClick={close}>
+    <div className={styles.modal}>
       <div className={styles.modal_content}>
         <img src="/icons/delete_modal.svg" />
         <div className={styles.modal_text_area}>
