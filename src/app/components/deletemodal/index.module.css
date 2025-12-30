@@ -13,32 +13,44 @@
 }
 
 .modal_content {
-  background-color: #fff;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   z-index: 200;
+  overflow: hidden;
 }
 
 .modal_content img {
   width: 80.6vw;
-  border-radius: 8px 8px 0 0;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
 }
 
-.modal_text_btn {
-  height: 22vh;
-  width: 70vw;
+.modal_text_area {
+  height: 13vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 2vh 2vw 0 2vw;
+  margin: 0;
+  border: none;
 }
 
 .modal_content h2 {
-  font-size: 4.48vw;
+  font-size: 3vw;
   font-weight: 350;
   color: #3f3f3f;
+  margin: 0;
+}
+
+.modal_content h3 {
+  margin: 0;
 }
 
 .modal_text {
@@ -59,40 +71,48 @@
   color: #3f3f3f;
 }
 
-.add_btn {
+.btn_area {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 2vw;
+  background-color: #fff;
+  width: 100%;
+  padding: 0 2vw 2vh 2vw;
+  border-radius: 0 0 15px 15px;
+  margin: 0;
+  border: none;
+  font-size: 2.99vw;
 }
 
-.AI_btn,
-.hand_btn {
+.cansel_btn {
   border-radius: 40px;
   width: 24.88vw;
   height: 2.86vh;
-  font-size: 2.99vw;
   font-weight: 350;
-  text-align: center;
+  color: #3f3f3f;
+  line-height: 2.86vh;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit_btn {
+  border-radius: 40px;
+  width: 24.88vw;
+  height: 2.86vh;
+  font-weight: 350;
   color: #fff;
   line-height: 2.86vh;
   cursor: pointer;
-}
-
-.AI_btn {
-  background: linear-gradient(
-    90deg,
-    rgba(32, 141, 251, 0.6) 0%,
-    rgba(135, 109, 232, 0.6) 20%,
-    rgba(212, 80, 192, 0.6) 40%,
-    rgba(243, 56, 115, 0.6) 60%,
-    rgba(254, 79, 57, 0.6) 80%,
-    rgba(255, 134, 14, 0.6) 100%
-  );
-}
-
-.hand_btn {
   background-color: #ef9494;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* モーダルが表示されている状態のクラス */
@@ -105,4 +125,29 @@
 /* is-activeを使用した際に、コンテンツを上部ではなく中央に表示するための微調整 */
 .modal.is_active .modal_content {
   margin: auto;
+}
+
+/* PC用のスタイル（768px以上） */
+@media (min-width: 768px) {
+  .modal_content{
+    width: 35vw;
+  }
+  .modal_content h2 {
+    font-size: 1.5vw;
+    padding-left: 0;
+  }
+  .modal_text_area {
+    height: 20vh;
+  }
+  .btn_area {
+    font-size: 1.5vw;
+  }
+  .cansel_btn {
+    height: 5vh;
+     width: 12vw;
+  }
+  .submit_btn {
+    height: 5vh;
+    width: 12vw;
+  }
 }

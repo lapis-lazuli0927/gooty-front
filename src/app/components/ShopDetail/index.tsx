@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { Shop } from "@/lib/api";
 import styles from "./index.module.css";
+import DeleteModal from "../deletemodal";
 
 interface ShopDetailProps {
   shop: Shop;
 }
 
 export default function ShopDetail({ shop }: ShopDetailProps) {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const MAX_STARS = 5;
   const currentLevel = shop.review !== null ? shop.review : 0;
 
@@ -105,8 +108,15 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
           className={styles.trash_btn_icon}
           src="/icons/show_trash_icon.svg"
           alt="削除ボタン"
+          onClick={() => setIsDeleteModalOpen(true)}
         />
       </div>
+      {isDeleteModalOpen && (
+        <DeleteModal
+          id={shop.id}
+          close={() => setIsDeleteModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
