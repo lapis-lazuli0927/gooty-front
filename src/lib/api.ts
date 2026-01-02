@@ -76,7 +76,6 @@ export interface ShopCreateRequest {
   tel: string | null;
   memo: string | null;
   review: number;
-  is_instagram: boolean;
   is_ai_generated: boolean;
 }
 
