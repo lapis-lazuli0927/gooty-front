@@ -39,6 +39,7 @@ body {
   font-optical-sizing: auto;
   background-image: url("../../public/images/smart_phone_background.png");
   background-size: cover;
+  background-attachment: fixed;
   background-repeat: no-repeat;
 }
 
@@ -51,5 +52,6 @@ h1 {
   body {
     background-image: url("../../public/images/pc_background.png");
     background-attachment: fixed; 
+    background-repeat: no-repeat;
   }
 }

@@ -130,7 +130,7 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 5vh auto;
-    width: 60%;
+    width: 65%;
     height: 100%;
   }
 
@@ -165,7 +165,8 @@
   }
 
   .stars {
-    justify-content: space-between;
+    justify-content: center;
+    width: 30%;
   }
 
   .input_btn {
@@ -179,5 +180,12 @@
     min-width: 120px;
     height: 6vh;
     font-size: 1.5vw;
+    cursor: pointer;
   }
+
+  .submit_button:active {
+    box-shadow: none; 
+    transform: translateY(3px); 
+  }
+
 }
