@@ -1,4 +1,4 @@
-import { useState } from "react";
+import Image from "next/image";
 import styles from "./index.module.css";
 import { useRouter } from "next/navigation";
 
@@ -9,13 +9,19 @@ interface InputModalProps {
 export default function InputModal({ close }: InputModalProps) {
   const router = useRouter();
   const handleManualRegister = () => {
-    // 新規登録ページへ遷移する
     router.push("/create");
   };
   return (
     <div className={styles.modal} onClick={close}>
       <div className={styles.modal_content}>
-        <img src="/icons/input_modal.svg" />
+        <Image
+          src="/icons/input_modal.svg"
+          alt="新規登録"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "auto", height: "auto" }}
+        />
         <div className={styles.modal_text_btn}>
           <h2>お店の新規登録</h2>
           <div className={styles.modal_text}>

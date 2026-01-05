@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import { Shop } from "@/lib/api";
 import styles from "./index.module.css";
 import DeleteModal from "../deletemodal";
@@ -20,56 +21,80 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         </div>
         <div className={styles.shop_line}></div>
         <div className={styles.shop_Instagram_icon}>
-          <img
+          <Image
             src={
               shop.is_instagram
                 ? "/icons/shop_Instagram_icon_show.svg"
                 : "/icons/shop_non_Instagram_icon.svg"
             }
             alt={shop.is_instagram ? "Instagramあり" : "Instagramなし"}
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
       </div>
       <div className={styles.shop_info}>
         <div className={styles.train}>
-          <img
+          <Image
             className={styles.train_icon}
             src="/icons/train_icon.svg"
             alt="駅のアイコン"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
           <p>{shop.station_name || "駅情報未登録"}</p>
         </div>
         <div className={styles.map}>
-          <img
+          <Image
             className={styles.map_icon}
             src="/icons/map_icon.svg"
             alt="マップのアイコン"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
           <p>{shop.address || "住所未登録"}</p>
         </div>
         <div className={styles.phone}>
-          <img
+          <Image
             className={styles.phone_icon}
             src="/icons/phone_icon.svg"
             alt="電話のアイコン"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
           <p>{shop.tel || "電話番号未登録"}</p>
         </div>
       </div>
       <div className={styles.memo}>
         <div className={styles.memo_border_left}>
-          <img
+          <Image
             className={styles.memo_border_left_icon}
             src="/icons/memo_border_left.svg"
-            alt="/"
+            alt="メモ左装飾"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
         <p className={styles.memo_title}>memo</p>
         <div className={styles.memo_border_right}>
-          <img
+          <Image
             className={styles.memo_border_right_icon}
             src="/icons/memo_border_right.svg"
-            alt="/"
+            alt="メモ右装飾"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
       </div>
@@ -81,33 +106,44 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         <div className={styles.review_star}>
           {[...Array(MAX_STARS)].map((_, index) => {
             const starNumber = index + 1;
-            // 塗りつぶすかどうかの判定: starNumberが currentLevel以下なら true
             const isFilled = starNumber <= currentLevel;
             return (
-              <img
+              <Image
                 key={index}
                 className={styles.review_star_icon}
                 src={
                   isFilled
-                    ? "/icons/review_star_show.svg" // 黄色い星 (塗りつぶし)
-                    : "/icons/review_star_show_empty.svg" // 無色の星 (空)
+                    ? "/icons/review_star_show.svg"
+                    : "/icons/review_star_show_empty.svg"
                 }
                 alt={`評価星 ${starNumber} (${isFilled ? "満点" : "空"})`}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "auto", height: "auto" }}
               />
             );
           })}
         </div>
       </div>
       <div className={styles.edit_trash_btn}>
-        <img
+        <Image
           className={styles.edit_btn_icon}
           src="/icons/show_edit_icon.svg"
           alt="編集ボタン"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "auto", height: "auto" }}
         />
-        <img
+        <Image
           className={styles.trash_btn_icon}
           src="/icons/show_trash_icon.svg"
           alt="削除ボタン"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "auto", height: "auto" }}
           onClick={() => setIsDeleteModalOpen(true)}
         />
       </div>
