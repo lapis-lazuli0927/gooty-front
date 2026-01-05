@@ -76,7 +76,6 @@ export default function ShopCard({ shop }: ShopCardProps) {
                   width={0}
                   height={0}
                   sizes="100vw"
-                  style={{ width: "auto", height: "auto" }}
                 />
               );
             })}
