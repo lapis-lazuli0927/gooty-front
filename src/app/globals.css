@@ -45,3 +45,11 @@ body {
 h1 {
   font-weight: normal;
 }
+
+
+@media (min-width: 768px) {
+  body {
+    background-image: url("../../public/images/pc_background.png");
+    background-attachment: fixed; 
+  }
+}
