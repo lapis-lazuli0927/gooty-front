@@ -1,6 +1,5 @@
-import { useState } from "react";
+import Image from "next/image";
 import styles from "./index.module.css";
-import { useRouter } from "next/navigation";
 import { deleteShop } from "@/lib/api";
 
 interface DeleteModalProps {
@@ -9,7 +8,6 @@ interface DeleteModalProps {
 }
 
 export default function DeleteModal({ id, close }: DeleteModalProps) {
-  const router = useRouter();
   const handleCancel = () => {
     close();
   };
@@ -24,7 +22,14 @@ export default function DeleteModal({ id, close }: DeleteModalProps) {
   return (
     <div className={styles.modal}>
       <div className={styles.modal_content}>
-        <img src="/icons/delete_modal.svg" />
+        <Image
+          src="/icons/delete_modal.svg"
+          alt="削除確認"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "auto", height: "auto" }}
+        />
         <div className={styles.modal_text_area}>
           <h2>このお店の情報を削除しますか？<br />この操作は取り消せません。</h2>
         </div>

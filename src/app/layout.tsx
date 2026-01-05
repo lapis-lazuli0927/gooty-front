@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_JP, Abril_Fatface } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-noto-sans-jp",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const abrilFatface = Abril_Fatface({
   subsets: ["latin"],
+  weight: "400",
+  variable: "--font-abril-fatface",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,26 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Noto+Sans+JP:wght@100..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="ja" className={`${notoSansJP.variable} ${abrilFatface.variable}`}>
       <body>{children}</body>
     </html>
   );

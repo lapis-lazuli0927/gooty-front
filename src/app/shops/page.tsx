@@ -1,19 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { fetchShops, Shops, fetchShop, Shop } from "@/lib/api";
 import ShopCard from "@/app/components/ShopCard";
 import ShopDetail from "@/app/components/ShopDetail";
 import InputModal from "@/app/components/inputmodal";
-import GlobalError from "@/app/components/GlobalError";
 import styles from "./page.module.css";
 
 export default function ShopsPage() {
   const [shops, setShops] = useState<Shops[]>([]);
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
   const [selectedShopId, setSelectedShopId] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
   const [detailLoading, setDetailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,8 +40,6 @@ export default function ShopsPage() {
         setShops(response.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load shops");
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -90,6 +87,7 @@ export default function ShopsPage() {
   
   return (
     <div className={styles.shop_index_page_container}>
+      {error && <div className={styles.error_message}>{error}</div>}
       {isModalOpen && <InputModal close={closeModal} />}
       <div className={styles.header_container}>
         <div className={styles.header}>
@@ -97,10 +95,14 @@ export default function ShopsPage() {
         </div>
         <div className={styles.sort}>
           <p className={styles.sort_text}>登録</p>
-          <img
+          <Image
             className={styles.sort_image}
             src="/icons/sort_solid_full.svg"
-            alt="/"
+            alt="ソートアイコン"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
       </div>
@@ -127,10 +129,14 @@ export default function ShopsPage() {
       </div>
       <div className={styles.footer}>
         <div className={styles.add_shop_btn}>
-          <img
+          <Image
             className={styles.add_shop_btn_icon}
             src="/icons/add_shop_btn.svg"
-            alt="/"
+            alt="店舗追加ボタン"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "auto", height: "auto" }}
             onClick={openModal}
           />
         </div>

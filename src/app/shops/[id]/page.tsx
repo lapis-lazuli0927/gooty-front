@@ -1,17 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { fetchShop } from "@/lib/api";
+import { useParams } from "next/navigation";
+import { fetchShop, Shop } from "@/lib/api";
 import styles from "./page.module.css";
 import GlobalError from "@/app/components/GlobalError";
 import ShopDetail from "@/app/components/ShopDetail";
 
 export default function ShopsPage() {
-  const [shop, setShop] = useState<any>(null);
+  const [shop, setShop] = useState<Shop | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
   const params = useParams();
   const id = params?.id ? Number(params.id) : null;
 

@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ShopCreateRequest, createShop } from "@/lib/api";
+import { createShop } from "@/lib/api";
 import styles from "./page.module.css";
 import GlobalError from "@/app/components/GlobalError";
 
@@ -36,7 +37,6 @@ export default function Create() {
     is_instagram: false,
     is_ai_generated: false,
   });
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [nameError, setNameError] = useState(false);
 
@@ -65,7 +65,6 @@ export default function Create() {
       setNameError(true);
       return;
     }
-    setLoading(true);
     setError(null);
 
     try {
@@ -75,8 +74,6 @@ export default function Create() {
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load shops");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -101,7 +98,14 @@ export default function Create() {
         <div className={styles.tag}>
           <div className={styles.label_group}>
             <label htmlFor="shop-name">お店の名前</label>
-            <img src="../icons/required.svg" alt="必須" />
+            <Image
+              src="/icons/required.svg"
+              alt="必須"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "auto", height: "auto" }}
+            />
           </div>
           <input
             type="text"
@@ -191,15 +195,18 @@ export default function Create() {
                 const starValue = index + 1;
                 const icon =
                   starValue <= shopData.review
-                    ? "../icons/star_icon_full.svg" // 評価済み
-                    : "../icons/star_icon_none.svg"; // 未評価
+                    ? "/icons/star_icon_full.svg"
+                    : "/icons/star_icon_none.svg";
                 return (
-                  <img
+                  <Image
                     key={index}
                     src={icon}
                     alt={`${starValue}星`}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
                     onClick={() => handleStarClick(starValue)}
-                    style={{ cursor: "pointer" }}
+                    style={{ width: "auto", height: "auto", cursor: "pointer" }}
                   />
                 );
               })}
