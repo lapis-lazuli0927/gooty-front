@@ -37,7 +37,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             src="/icons/train_icon.svg"
             alt="駅のアイコン"
           />
-          <p>{shop.station_name}</p>
+          <p>{shop.station_name || "駅情報未登録"}</p>
         </div>
         <div className={styles.map}>
           <img
@@ -45,7 +45,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             src="/icons/map_icon.svg"
             alt="マップのアイコン"
           />
-          <p>{shop.address}</p>
+          <p>{shop.address || "住所情報未登録"}</p>
         </div>
         <div className={styles.phone}>
           <img
@@ -53,7 +53,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             src="/icons/phone_icon.svg"
             alt="電話のアイコン"
           />
-          <p>{shop.tel}</p>
+          <p>{shop.tel || "電話情報未登録"}</p>
         </div>
       </div>
       <div className={styles.memo}>
@@ -74,7 +74,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         </div>
       </div>
       <div className={styles.memo_text}>
-        <p>{shop.memo}</p>
+        <p>{shop.memo || "メモ情報未入力"}</p>
       </div>
       <div className={styles.review}>
         <p className={styles.review_title}>review</p>
@@ -112,12 +112,8 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         />
       </div>
       {isDeleteModalOpen && (
-        <DeleteModal
-          id={shop.id}
-          close={() => setIsDeleteModalOpen(false)}
-        />
+        <DeleteModal id={shop.id} close={() => setIsDeleteModalOpen(false)} />
       )}
     </div>
   );
 }
-
