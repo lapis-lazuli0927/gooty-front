@@ -46,7 +46,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             sizes="100vw"
             style={{ width: "auto", height: "auto" }}
           />
-          <p>{shop.station_name}</p>
+          <p>{shop.station_name || "駅情報未登録"}</p>
         </div>
         <div className={styles.map}>
           <Image
@@ -58,7 +58,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             sizes="100vw"
             style={{ width: "auto", height: "auto" }}
           />
-          <p>{shop.address}</p>
+          <p>{shop.address || "住所未登録"}</p>
         </div>
         <div className={styles.phone}>
           <Image
@@ -70,7 +70,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             sizes="100vw"
             style={{ width: "auto", height: "auto" }}
           />
-          <p>{shop.tel}</p>
+          <p>{shop.tel || "電話番号未登録"}</p>
         </div>
       </div>
       <div className={styles.memo}>
@@ -99,7 +99,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         </div>
       </div>
       <div className={styles.memo_text}>
-        <p>{shop.memo}</p>
+        <p>{shop.memo || "メモ未入力"}</p>
       </div>
       <div className={styles.review}>
         <p className={styles.review_title}>review</p>
@@ -148,12 +148,8 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         />
       </div>
       {isDeleteModalOpen && (
-        <DeleteModal
-          id={shop.id}
-          close={() => setIsDeleteModalOpen(false)}
-        />
+        <DeleteModal id={shop.id} close={() => setIsDeleteModalOpen(false)} />
       )}
     </div>
   );
 }
-
