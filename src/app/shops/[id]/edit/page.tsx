@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { createShop } from "@/lib/api";
+import { useRouter, useParams } from "next/navigation";
+import { updateShop, fetchShop } from "@/lib/api";
 import styles from "./page.module.css";
 import GlobalError from "@/app/components/GlobalError";
 
@@ -24,8 +24,11 @@ interface ShopData {
   is_ai_generated: boolean;
 }
 
-export default function Create() {
+export default function Edit() {
   const router = useRouter();
+  const params = useParams();
+  const shopId = params.id as string;
+
   const [shopData, setShopData] = useState<ShopData>({
     name: null,
     url: null,
@@ -39,6 +42,21 @@ export default function Create() {
   });
   const [error, setError] = useState<string | null>(null);
   const [nameError, setNameError] = useState(false);
+
+  useEffect(() => {
+    const fetchShopData = async () => {
+      try {
+        const response = await fetchShop(shopId);
+        if (response.success) {
+          setShopData(response.data);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load shops");
+      }
+    };
+    if (shopId) fetchShopData();
+  }, [shopId]);
+
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -68,7 +86,7 @@ export default function Create() {
     setError(null);
 
     try {
-      const response = await createShop(shopData);
+      const response = await updateShop(shopId, shopData);
       if (response.success) {
         router.push("/shops");
       }
