@@ -86,6 +86,12 @@
 @media (min-width: 768px) {
   .content_wrapper {
     flex-direction: row;
+    width: 65%;
+    margin: 0 auto;
+  }
+
+  .sort {
+    margin-right: 50%;
   }
 
   .shop_card_container {
