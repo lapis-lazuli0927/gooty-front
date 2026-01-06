@@ -138,6 +138,14 @@
   margin-top: 33px;
 }
 
+.edit_btn_icon:hover {
+  opacity: 0.7;
+}
+
+.trash_btn_icon:hover {
+  opacity: 0.7;
+}
+
 @media (min-width: 768px) {
   .show_body {
     height: 100%;
@@ -233,6 +241,7 @@
   .edit_trash_btn {
     display: flex;
     justify-content: space-between;
+    margin-top: 0;
   }
 
   .edit_btn_icon {
@@ -243,9 +252,5 @@
   .trash_btn_icon {
     margin-right: 20%;
     max-width: 60px;
-  }
-
-  .edit_trash_btn {
-    margin-top: 0;
   }
 }
