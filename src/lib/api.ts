@@ -187,3 +187,26 @@ export async function deleteShop(id: string): Promise<{ success: boolean }> {
   }
   return response.json();
 }
+
+
+/**
+ * お店の更新
+ */
+export async function updateShop(
+  id: string,
+  updatedData: Partial<ShopCreateRequest>
+): Promise<{ success: boolean }> {
+  const response = await fetch(`${API_BASE_URL}/shops/${id}`, {
+    method: "PUT", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedData),
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.error || "お店の更新に失敗しました");
+  }
+  return result;
+}
