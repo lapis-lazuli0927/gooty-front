@@ -82,6 +82,10 @@
   justify-content: center;
 }
 
+.add_shop_btn:hover {
+  opacity: 0.8;
+}
+
 /* PC用のスタイル（768px以上） */
 @media (min-width: 768px) {
   .content_wrapper {
