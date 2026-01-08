@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100%;
-  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  justify-content: space-around;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .shop_title {
-  margin-top: 31px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -79,11 +79,7 @@
 }
 
 .memo_border_left {
-  width: 37vw;
-}
-
-.memo_border_left_icon {
-  width: 100%;
+  width: 40%;
 }
 
 .memo_title {
@@ -95,11 +91,7 @@
 }
 
 .memo_border_right {
-  width: 37vw;
-}
-
-.memo_border_right_icon {
-  width: 100%;
+  width: 40%;
 }
 
 .memo_text {
@@ -114,7 +106,10 @@
 
 .memo_text p {
   width: 85.82vw;
-  height: 160px;
+  height: auto;
+  max-height: 180px;
+  overflow-y: auto;
+  margin: 0 auto;
 }
 
 .review p {
@@ -138,11 +133,130 @@
 
 .edit_btn_icon {
   margin-left: 16vw;
-  margin-top: 33px;
 }
 
 .trash_btn_icon {
   margin-right: 16vw;
-  margin-top: 33px;
 }
 
+.edit_btn_icon:hover {
+  opacity: 0.7;
+}
+
+.trash_btn_icon:hover {
+  opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+  .show_body {
+    height: 100%;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 0 20px 0 20px;
+  }
+
+  .shop_title {
+    margin-top: 0;
+  }
+
+  .shop_name {
+    font-size: 20px;
+  }
+
+  .shop_line {
+    height: 2px;
+  }
+
+  .shop_Instagram_icon {
+    margin-top: 7.5px;
+    width: 50%;
+    height: 50%;
+  }
+
+  .shop_info {
+    font-size: 10px;
+    margin-left: 57px;
+    margin-top: 0;
+  }
+
+  .train_icon {
+    margin-right: 11px;
+    width: 50%;
+    height: 50%;
+  }
+
+  .map {
+    margin-top: 1.5px;
+  }
+
+  .map_icon {
+    margin-right: 11px;
+    width: 50%;
+    height: 50%;
+  }
+
+  .phone {
+    margin-top: 1.5px;
+  }
+
+  .phone_icon {
+    margin-right: 11px;
+    width: 50%;
+    height: 50%;
+  }
+
+  .memo {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+
+  .memo_title {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .memo_text {
+    font-size: 11px;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .memo_text p {
+    width: 80%;
+    height: auto;
+    min-height: 130px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 0 auto;
+  }
+
+  .review p {
+    font-size: 9px;
+  }
+
+  .review_star {
+    margin-top: 1px;
+  }
+
+  .review_star_icon {
+    max-width: 30px;
+  }
+
+  .edit_trash_btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+
+  .edit_btn_icon {
+    margin-left: 20%;
+    max-width: 60px;
+  }
+
+  .trash_btn_icon {
+    margin-right: 20%;
+    max-width: 60px;
+  }
+}

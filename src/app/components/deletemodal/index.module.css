@@ -129,7 +129,10 @@
 
 /* PC用のスタイル（768px以上） */
 @media (min-width: 768px) {
-  .modal_content{
+  .modal_content img {
+    content: url("/icons/delete_modal_pc.svg");
+  }
+  .modal_content {
     width: 35vw;
   }
   .modal_content h2 {
@@ -144,10 +147,16 @@
   }
   .cansel_btn {
     height: 5vh;
-     width: 12vw;
+    width: 12vw;
   }
   .submit_btn {
     height: 5vh;
     width: 12vw;
+  }
+  .cansel_btn:hover {
+    opacity: 0.8;
+  }
+  .submit_btn:hover {
+    opacity: 0.8;
   }
 }
