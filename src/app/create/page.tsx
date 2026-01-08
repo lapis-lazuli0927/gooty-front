@@ -105,21 +105,33 @@ export default function Create() {
               height={0}
               sizes="100vw"
               style={{ width: "auto", height: "auto" }}
+              className={styles.required_mobile}
             />
           </div>
-          <input
-            type="text"
-            id="shop-name"
-            name="name"
-            value={nullToEmpty(shopData.name)}
-            onChange={handleChange}
-            style={
-              nameError
-                ? { border: "2px solid #D61313", backgroundColor: "#FCDADA" }
-                : {}
-            }
-            placeholder="例）お店の名前"
-          />
+          <div className={styles.input_wrapper}>
+            <Image
+              src="/icons/required.svg"
+              alt="必須"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "auto", height: "auto" }}
+              className={styles.required_pc}
+            />
+            <input
+              type="text"
+              id="shop-name"
+              name="name"
+              value={nullToEmpty(shopData.name)}
+              onChange={handleChange}
+              style={
+                nameError
+                  ? { border: "2px solid #D61313", backgroundColor: "#FCDADA" }
+                  : {}
+              }
+              placeholder="例）お店の名前"
+            />
+          </div>
           {nameError && (
             <p className={styles.contact_message_error}>
               お店の名前は必須項目です。
