@@ -54,12 +54,14 @@ export interface ShopsResponse {
 export interface Shop {
   id: number;
   name: string;
-  station_name: string;
-  address: string;
-  tel: string;
-  memo: string;
+  url: string | null;
+  station_name: string | null;
+  address: string | null;
+  tel: string | null;
+  memo: string | null;
   review: number;
   is_instagram: boolean;
+  is_ai_generated: boolean;
 }
 
 export interface ShopResponse {
