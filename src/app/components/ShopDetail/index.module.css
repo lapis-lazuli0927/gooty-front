@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100%;
-  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  justify-content: space-around;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .shop_title {
-  margin-top: 31px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -106,7 +106,10 @@
 
 .memo_text p {
   width: 85.82vw;
-  height: 160px;
+  height: auto;
+  max-height: 180px;
+  overflow-y: auto;
+  margin: 0 auto;
 }
 
 .review p {
@@ -130,12 +133,10 @@
 
 .edit_btn_icon {
   margin-left: 16vw;
-  margin-top: 33px;
 }
 
 .trash_btn_icon {
   margin-right: 16vw;
-  margin-top: 33px;
 }
 
 .edit_btn_icon:hover {
@@ -151,6 +152,7 @@
     height: 100%;
     justify-content: space-between;
     overflow: hidden;
+    padding: 0 20px 0 20px;
   }
 
   .shop_title {
@@ -216,14 +218,18 @@
   }
 
   .memo_text {
-    font-size: 8px;
+    font-size: 11px;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 2px;
   }
 
   .memo_text p {
     width: 80%;
-    height: 50%;
+    height: auto;
+    min-height: 130px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 0 auto;
   }
 
   .review p {
