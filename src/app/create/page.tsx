@@ -99,7 +99,7 @@ export default function Create() {
           <div className={styles.label_group}>
             <label htmlFor="shop-name">お店の名前</label>
             <Image
-              src="/icons/required.svg"
+              src="/icons/repuired_sp.svg"
               alt="必須"
               width={0}
               height={0}
@@ -110,7 +110,7 @@ export default function Create() {
           </div>
           <div className={styles.input_wrapper}>
             <Image
-              src="/icons/required.svg"
+              src="/icons/required_pc.svg"
               alt="必須"
               width={0}
               height={0}
