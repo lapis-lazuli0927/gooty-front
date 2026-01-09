@@ -27,16 +27,16 @@ export default function ShopsPage() {
       setSelectedShopId(Number(selectedParam));
     }
   }, [selectedParam, isMobile]);
-  
+
   useEffect(() => {
     // 画面サイズの判定
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
-    
+
     return () => {
       window.removeEventListener("resize", checkIsMobile);
     };
@@ -93,7 +93,7 @@ export default function ShopsPage() {
       setSelectedShopId(id);
     }
   };
-  
+
   return (
     <div className={styles.shop_index_page_container}>
       {error && <div className={styles.error_message}>{error}</div>}
@@ -118,12 +118,9 @@ export default function ShopsPage() {
       <div className={styles.content_wrapper}>
         <div className={styles.shop_card_container}>
           {shops.map((shop) => (
-            <div
-              key={shop.id} 
-              onClick={() => handleCardClick(shop.id)}>
-
+            <div key={shop.id} onClick={() => handleCardClick(shop.id)}>
               <ShopCard shop={shop} />
-              </div>
+            </div>
           ))}
         </div>
         <div className={styles.shop_detail_container}>
@@ -132,7 +129,9 @@ export default function ShopsPage() {
           ) : selectedShop ? (
             <ShopDetail shop={selectedShop} />
           ) : (
-            <div className={styles.empty_detail}>ショップを選択してください</div>
+            <div className={styles.empty_detail}>
+              ショップを選択してください
+            </div>
           )}
         </div>
       </div>
