@@ -1,16 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { fetchShops, Shops, fetchShop, Shop } from "@/lib/api";
 import ShopCard from "@/app/components/ShopCard";
 import ShopDetail from "@/app/components/ShopDetail";
 import InputModal from "@/app/components/inputmodal";
 import styles from "./page.module.css";
-import { useSearchParams } from "next/navigation";
 
-export default function ShopsPage() {
+function ShopsContent() {
   const searchParams = useSearchParams();
   const selectedParam = searchParams.get("selected");
   const [shops, setShops] = useState<Shops[]>([]);
@@ -29,17 +28,12 @@ export default function ShopsPage() {
   }, [selectedParam, isMobile]);
 
   useEffect(() => {
-    // 画面サイズの判定
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkIsMobile);
-    };
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   useEffect(() => {
@@ -51,7 +45,6 @@ export default function ShopsPage() {
         setError(err instanceof Error ? err.message : "Failed to load shops");
       }
     };
-
     loadShops();
   }, []);
 
@@ -71,25 +64,18 @@ export default function ShopsPage() {
         setSelectedShop(null);
       }
     };
-
     loadSelectedShop();
   }, [selectedShopId]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const openModal = () => setIsModalOpen(true);
   const closeModal = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      setIsModalOpen(false);
-    }
+    if (event.target === event.currentTarget) setIsModalOpen(false);
   };
 
   const handleCardClick = (id: number) => {
     if (isMobile) {
-      // スマホの場合は別ページに遷移
       router.push(`/shops/${id}`);
     } else {
-      // PCの場合はstateで詳細を表示（URLは変更しない）
       setSelectedShopId(id);
     }
   };
@@ -150,5 +136,13 @@ export default function ShopsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ShopsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ShopsContent />
+    </Suspense>
   );
 }
