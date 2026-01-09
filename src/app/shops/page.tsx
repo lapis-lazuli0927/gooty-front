@@ -8,8 +8,11 @@ import ShopCard from "@/app/components/ShopCard";
 import ShopDetail from "@/app/components/ShopDetail";
 import InputModal from "@/app/components/inputmodal";
 import styles from "./page.module.css";
+import { useSearchParams } from "next/navigation";
 
 export default function ShopsPage() {
+  const searchParams = useSearchParams();
+  const selectedParam = searchParams.get("selected");
   const [shops, setShops] = useState<Shops[]>([]);
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
   const [selectedShopId, setSelectedShopId] = useState<number | null>(null);
@@ -19,6 +22,12 @@ export default function ShopsPage() {
   const [isMobile, setIsMobile] = useState(true);
   const router = useRouter();
 
+  useEffect(() => {
+    if (!isMobile && selectedParam) {
+      setSelectedShopId(Number(selectedParam));
+    }
+  }, [selectedParam, isMobile]);
+  
   useEffect(() => {
     // 画面サイズの判定
     const checkIsMobile = () => {

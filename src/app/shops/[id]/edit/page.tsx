@@ -88,7 +88,7 @@ export default function Edit() {
     try {
       const response = await updateShop(shopId, shopData);
       if (response.success) {
-        router.push("/shops");
+        router.push(`/shops?selected=${shopId}`);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load shops");
