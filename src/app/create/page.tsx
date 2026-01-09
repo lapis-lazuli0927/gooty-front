@@ -131,12 +131,12 @@ export default function Create() {
               }
               placeholder="例）お店の名前"
             />
+            {nameError && (
+              <p className={styles.contact_message_error}>
+                お店の名前は必須項目です。
+              </p>
+            )}
           </div>
-          {nameError && (
-            <p className={styles.contact_message_error}>
-              お店の名前は必須項目です。
-            </p>
-          )}
         </div>
 
         <div className={styles.tag}>
