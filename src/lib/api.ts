@@ -54,12 +54,14 @@ export interface ShopsResponse {
 export interface Shop {
   id: number;
   name: string;
-  station_name: string;
-  address: string;
-  tel: string;
-  memo: string;
+  url: string | null;
+  station_name: string | null;
+  address: string | null;
+  tel: string | null;
+  memo: string | null;
   review: number;
   is_instagram: boolean;
+  is_ai_generated: boolean;
 }
 
 export interface ShopResponse {
@@ -186,4 +188,27 @@ export async function deleteShop(id: string): Promise<{ success: boolean }> {
     throw new Error(result.error || "お店の削除に失敗しました");
   }
   return response.json();
+}
+
+
+/**
+ * お店の更新
+ */
+export async function updateShop(
+  id: string,
+  updatedData: Partial<ShopCreateRequest>
+): Promise<{ success: boolean }> {
+  const response = await fetch(`${API_BASE_URL}/shops/${id}`, {
+    method: "PUT", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedData),
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.error || "お店の更新に失敗しました");
+  }
+  return result;
 }

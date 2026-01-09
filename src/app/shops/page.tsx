@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { fetchShops, Shops, fetchShop, Shop } from "@/lib/api";
 import ShopCard from "@/app/components/ShopCard";
 import ShopDetail from "@/app/components/ShopDetail";
 import InputModal from "@/app/components/inputmodal";
 import styles from "./page.module.css";
 
-export default function ShopsPage() {
+function ShopsContent() {
+  const searchParams = useSearchParams();
+  const selectedParam = searchParams.get("selected");
   const [shops, setShops] = useState<Shops[]>([]);
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
   const [selectedShopId, setSelectedShopId] = useState<number | null>(null);
@@ -20,17 +22,18 @@ export default function ShopsPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // 画面サイズの判定
+    if (!isMobile && selectedParam) {
+      setSelectedShopId(Number(selectedParam));
+    }
+  }, [selectedParam, isMobile]);
+
+  useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
-    
-    return () => {
-      window.removeEventListener("resize", checkIsMobile);
-    };
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   useEffect(() => {
@@ -42,7 +45,6 @@ export default function ShopsPage() {
         setError(err instanceof Error ? err.message : "Failed to load shops");
       }
     };
-
     loadShops();
   }, []);
 
@@ -62,29 +64,22 @@ export default function ShopsPage() {
         setSelectedShop(null);
       }
     };
-
     loadSelectedShop();
   }, [selectedShopId]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const openModal = () => setIsModalOpen(true);
   const closeModal = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      setIsModalOpen(false);
-    }
+    if (event.target === event.currentTarget) setIsModalOpen(false);
   };
 
   const handleCardClick = (id: number) => {
     if (isMobile) {
-      // スマホの場合は別ページに遷移
       router.push(`/shops/${id}`);
     } else {
-      // PCの場合はstateで詳細を表示（URLは変更しない）
       setSelectedShopId(id);
     }
   };
-  
+
   return (
     <div className={styles.shop_index_page_container}>
       {error && <div className={styles.error_message}>{error}</div>}
@@ -109,12 +104,9 @@ export default function ShopsPage() {
       <div className={styles.content_wrapper}>
         <div className={styles.shop_card_container}>
           {shops.map((shop) => (
-            <div
-              key={shop.id} 
-              onClick={() => handleCardClick(shop.id)}>
-
+            <div key={shop.id} onClick={() => handleCardClick(shop.id)}>
               <ShopCard shop={shop} />
-              </div>
+            </div>
           ))}
         </div>
         <div className={styles.shop_detail_container}>
@@ -123,7 +115,9 @@ export default function ShopsPage() {
           ) : selectedShop ? (
             <ShopDetail shop={selectedShop} />
           ) : (
-            <div className={styles.empty_detail}>ショップを選択してください</div>
+            <div className={styles.empty_detail}>
+              ショップを選択してください
+            </div>
           )}
         </div>
       </div>
@@ -142,5 +136,13 @@ export default function ShopsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ShopsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ShopsContent />
+    </Suspense>
   );
 }

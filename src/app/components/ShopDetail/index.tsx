@@ -1,8 +1,11 @@
+"use client";
+
 import { useState } from "react";
 import Image from "next/image";
 import { Shop } from "@/lib/api";
 import styles from "./index.module.css";
 import DeleteModal from "../deletemodal";
+import { useRouter } from "next/navigation";
 
 interface ShopDetailProps {
   shop: Shop;
@@ -12,6 +15,10 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const MAX_STARS = 5;
   const currentLevel = shop.review !== null ? shop.review : 0;
+  const router = useRouter();
+  const handleEditClick = () => {
+    router.push(`/shops/${shop.id}/edit`);
+  };
 
   return (
     <div className={styles.show_body}>
@@ -135,6 +142,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
           height={0}
           sizes="100vw"
           style={{ width: "auto", height: "auto" }}
+          onClick={handleEditClick}
         />
         <Image
           className={styles.trash_btn_icon}
