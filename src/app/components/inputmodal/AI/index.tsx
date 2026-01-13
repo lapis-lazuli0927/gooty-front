@@ -3,15 +3,18 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
 import Image from "next/image";
+import { createShop, ShopCreateRequest } from "@/lib/api";
 
 interface AIProps {
   onBack: () => void;
+  onClose: () => void;
 }
 
-export default function AI({ onBack }: AIProps) {
+export default function AI({ onBack, onClose }: AIProps) {
   const [url, setUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const handleRegister = () => {
+
+  const handleRegister = async () => {
     setErrorMessage("");
 
     if (!url.includes("instagram.com")) {
@@ -24,6 +27,28 @@ export default function AI({ onBack }: AIProps) {
         "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
       );
       return;
+    }
+
+    try {
+      const newShopData: ShopCreateRequest = {
+        name: null,
+        url: url,
+        station_name: null,
+        address: null,
+        tel: null,
+        memo: null,
+        review: 0,
+        is_ai_generated: true,
+      };
+      const result = await createShop(newShopData);
+
+      if (result.success) {
+        onClose();
+      }
+    } catch (error) {
+      setErrorMessage(
+        "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
+      );
     }
   };
 

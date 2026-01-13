@@ -23,7 +23,10 @@ export default function InputModal({ close }: InputModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {isAiView ? (
-          <AI onBack={() => setIsAiView(false)} />
+          <AI
+            onBack={() => setIsAiView(false)}
+            onClose={() => close({} as React.MouseEvent<HTMLDivElement>)}
+          />
         ) : (
           <>
             <Image
