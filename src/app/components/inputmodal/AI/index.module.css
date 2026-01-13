@@ -15,7 +15,6 @@
   font-size: 4.48vw;
   font-weight: 350;
   color: #3f3f3f;
-  text-align: center;
 }
 
 .modal_text {
@@ -39,6 +38,12 @@
   box-sizing: border-box;
   font-size: 3.23vw;
   padding: 10px;
+}
+
+.url_input:focus {
+  outline: none;
+  background-color: #fff;
+  border: 3px solid #70c8ea;
 }
 
 .contact_message_error {
