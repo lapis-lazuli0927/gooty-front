@@ -26,7 +26,6 @@
 .modal_text p {
   font-size: 3.5vw;
   color: #3f3f3f;
-  text-align: center;
 }
 
 .url_input {
@@ -47,8 +46,8 @@
 }
 
 .contact_message_error {
-  color: #3f3f3f;
-  font-size: 14px;
+  color: #D61313;
+  font-size: 1.9vw;
 }
 
 .add_btn {
@@ -110,6 +109,10 @@
     height: 5vh;
     font-size: 1.1vw;
   }
+
+.contact_message_error {
+  font-size: 0.8vw;
+}
 
   .add_btn {
     display: flex;

@@ -9,7 +9,24 @@ interface AIProps {
 }
 
 export default function AI({ onBack }: AIProps) {
-  const [nameError] = useState(false);
+  const [url, setUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const handleRegister = () => {
+    setErrorMessage("");
+
+    if (!url.includes("instagram.com")) {
+      setErrorMessage("InstagramのURLを入力してください。");
+      return;
+    }
+
+    if (url.includes("ai")) {
+      setErrorMessage(
+        "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
+      );
+      return;
+    }
+  };
+
   return (
     <>
       <Image
@@ -26,25 +43,27 @@ export default function AI({ onBack }: AIProps) {
           <p>InstagramのURLを入力してください</p>
           <input
             type="text"
-            placeholder="https://www.instagram.com/..."
+            placeholder="ここにInstagramのURLをペースト(https://www.instagram.com/...)"
             className={styles.url_input}
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
             style={
-              nameError
+              errorMessage
                 ? { border: "2px solid #D61313", backgroundColor: "#FCDADA" }
                 : {}
             }
           />
-           {nameError && (
-            <p className={styles.contact_message_error}>
-              InstagramのURLを入力してください
-            </p>
+          {errorMessage && (
+            <div className={styles.contact_message_error}>{errorMessage}</div>
           )}
         </div>
         <div className={styles.add_btn}>
           <h3 className={styles.hand_btn} onClick={onBack}>
             戻る
           </h3>
-          <h3 className={styles.AI_btn}>登録</h3>
+          <h3 className={styles.AI_btn} onClick={handleRegister}>
+            登録
+          </h3>
         </div>
       </div>
     </>
