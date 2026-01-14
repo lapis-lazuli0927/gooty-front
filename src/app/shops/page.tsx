@@ -20,6 +20,8 @@ function ShopsContent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
   const router = useRouter();
+  const sort = searchParams.get("sort") || "created_at";
+  const order = searchParams.get("order") || "desc";
 
   useEffect(() => {
     if (!isMobile && selectedParam) {
@@ -39,14 +41,27 @@ function ShopsContent() {
   useEffect(() => {
     const loadShops = async () => {
       try {
-        const response = await fetchShops();
+        const response = await fetchShops(sort, order);
         setShops(response.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load shops");
       }
     };
     loadShops();
-  }, []);
+  }, [sort, order]);
+
+  const handleSortTypeChange = () => {
+    const nextSort = sort === "created_at" ? "review" : "created_at";
+    router.push(`?sort=${nextSort}&order=desc`, { scroll: false });
+  };
+
+  const handleOrderToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const nextOrder = order === "asc" ? "desc" : "asc";
+    router.push(`?sort=${sort}&order=${nextOrder}`, { scroll: false });
+  };
+
+  const label = sort === "review" ? "評価" : "登録";
 
   useEffect(() => {
     const loadSelectedShop = async () => {
@@ -88,16 +103,24 @@ function ShopsContent() {
         <div className={styles.header}>
           <h1 className={styles.header_logo}>Gooty</h1>
         </div>
-        <div className={styles.sort}>
-          <p className={styles.sort_text}>登録</p>
+        <div className={styles.sort} style={{ cursor: "pointer" }}>
+          <p className={styles.sort_text} onClick={handleSortTypeChange}>
+            {label}
+          </p>
           <Image
             className={styles.sort_image}
+            onClick={handleOrderToggle}
             src="/icons/sort_solid_full.svg"
             alt="ソートアイコン"
             width={0}
             height={0}
             sizes="100vw"
-            style={{ width: "auto", height: "auto" }}
+            style={{
+              width: "auto",
+              height: "auto",
+              transform: order === "asc" ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.2s",
+            }}
           />
         </div>
       </div>
