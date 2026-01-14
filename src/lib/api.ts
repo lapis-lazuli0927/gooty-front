@@ -126,9 +126,15 @@ export async function fetchDemoShop(id: number): Promise<DemoShopResponse> {
 
 /**
  * 全店舗一覧を取得
+ * @param sort - ソート対象のフィールド (例: 'created_at', 'review')
+ * @param order - 並び順 ('asc' または 'desc')
  */
-export async function fetchShops(): Promise<ShopsResponse> {
-  const response = await fetch(`${API_BASE_URL}/shops`);
+export async function fetchShops(
+  sort: string = "created_at",
+  order: string = "desc"
+): Promise<ShopsResponse> {
+  const params = new URLSearchParams({ sort, order });
+  const response = await fetch(`${API_BASE_URL}/shops?${params.toString()}`);
   if (!response.ok) {
     throw new Error("Failed to fetch shops");
   }
@@ -190,7 +196,6 @@ export async function deleteShop(id: string): Promise<{ success: boolean }> {
   return response.json();
 }
 
-
 /**
  * お店の更新
  */
@@ -199,7 +204,7 @@ export async function updateShop(
   updatedData: Partial<ShopCreateRequest>
 ): Promise<{ success: boolean }> {
   const response = await fetch(`${API_BASE_URL}/shops/${id}`, {
-    method: "PUT", 
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
