@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from "react";
+import React, {
+  useState,
+  useCallback,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+} from "react";
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { updateShop, fetchShop } from "@/lib/api";
@@ -56,7 +62,6 @@ export default function Edit() {
     };
     if (shopId) fetchShopData();
   }, [shopId]);
-
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -117,32 +122,44 @@ export default function Edit() {
           <div className={styles.label_group}>
             <label htmlFor="shop-name">お店の名前</label>
             <Image
-              src="/icons/required.svg"
+              src="/icons/repuired_sp.svg"
               alt="必須"
               width={0}
               height={0}
               sizes="100vw"
               style={{ width: "auto", height: "auto" }}
+              className={styles.required_mobile}
             />
           </div>
-          <input
-            type="text"
-            id="shop-name"
-            name="name"
-            value={nullToEmpty(shopData.name)}
-            onChange={handleChange}
-            style={
-              nameError
-                ? { border: "2px solid #D61313", backgroundColor: "#FCDADA" }
-                : {}
-            }
-            placeholder="例）お店の名前"
-          />
-          {nameError && (
-            <p className={styles.contact_message_error}>
-              お店の名前は必須項目です。
-            </p>
-          )}
+          <div className={styles.input_wrapper}>
+            <Image
+              src="/icons/required_pc.svg"
+              alt="必須"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "auto", height: "auto" }}
+              className={styles.required_pc}
+            />
+            <input
+              type="text"
+              id="shop-name"
+              name="name"
+              value={nullToEmpty(shopData.name)}
+              onChange={handleChange}
+              style={
+                nameError
+                  ? { border: "2px solid #D61313", backgroundColor: "#FCDADA" }
+                  : {}
+              }
+              placeholder="例）お店の名前"
+            />
+            {nameError && (
+              <p className={styles.contact_message_error}>
+                お店の名前は必須項目です。
+              </p>
+            )}
+          </div>
         </div>
 
         <div className={styles.tag}>

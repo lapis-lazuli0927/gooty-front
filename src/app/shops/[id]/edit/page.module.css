@@ -70,6 +70,21 @@
   width: 8.21vw;
 }
 
+.required_mobile {
+  display: inline-block;
+}
+
+.required_pc {
+  display: none;
+}
+
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
 .tag input {
   background-color: rgba(255, 255, 255, 0.5);
   outline: none;
@@ -136,7 +151,11 @@
 
   .tag {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .tag label {
+    margin-right: 2.31vw;
   }
 
   .tag label,
@@ -162,6 +181,25 @@
     width: 4vw;
     max-width: 60px;
     margin-left: 0.5vw;
+  }
+
+  .required_mobile {
+    display: none;
+  }
+
+  .required_pc {
+    display: block;
+    width: 4vw;
+    max-width: 60px;
+    margin-bottom: 0.5vh;
+  }
+
+  .input_wrapper {
+    flex: 1;
+  }
+
+  .input_wrapper input {
+    width: 100%;
   }
 
   .stars {
