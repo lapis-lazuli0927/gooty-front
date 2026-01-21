@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./index.module.css";
 import Image from "next/image";
 import { createShop, ShopCreateRequest } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 interface AIProps {
   onBack: () => void;
@@ -11,10 +12,14 @@ interface AIProps {
 }
 
 export default function AI({ onBack, onClose }: AIProps) {
+  const router = useRouter();
   const [url, setUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegister = async () => {
+    if (isSubmitting) return;
+
     setErrorMessage("");
 
     if (!url.includes("instagram.com")) {
@@ -22,12 +27,7 @@ export default function AI({ onBack, onClose }: AIProps) {
       return;
     }
 
-    if (url.includes("ai")) {
-      setErrorMessage(
-        "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
-      );
-      return;
-    }
+    setIsSubmitting(true);
 
     try {
       const newShopData: ShopCreateRequest = {
@@ -43,12 +43,19 @@ export default function AI({ onBack, onClose }: AIProps) {
       const result = await createShop(newShopData);
 
       if (result.success) {
-        onClose();
+        if (result.data?.id) {
+          onClose();
+          router.push(`/shops/${result.data.id}/edit`);
+        } else if (result.success) {
+          onClose();
+        }
       }
-    } catch (error) {
+    } catch {
       setErrorMessage(
         "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -86,8 +93,22 @@ export default function AI({ onBack, onClose }: AIProps) {
           <h3 className={styles.hand_btn} onClick={onBack}>
             戻る
           </h3>
-          <h3 className={styles.AI_btn} onClick={handleRegister}>
-            登録
+          <h3
+            className={
+              isSubmitting
+                ? `${styles.AI_btn} ${styles.AI_btn_disabled}`
+                : styles.AI_btn
+            }
+            onClick={handleRegister}
+          >
+            {isSubmitting ? (
+              <>
+                <span className={styles.spinner}></span>
+                登録中...
+              </>
+            ) : (
+              "登録"
+            )}
           </h3>
         </div>
       </div>

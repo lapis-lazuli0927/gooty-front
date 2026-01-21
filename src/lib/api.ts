@@ -64,6 +64,9 @@ export interface ShopCreateRequest {
 
 export interface CreateResponse {
   success: boolean;
+  data?: {
+    id: number;
+  };
 }
 
 // ==========================================
