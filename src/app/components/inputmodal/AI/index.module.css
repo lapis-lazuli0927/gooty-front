@@ -46,7 +46,7 @@
 }
 
 .contact_message_error {
-  color: #D61313;
+  color: #d61313;
   font-size: 1.9vw;
 }
 
@@ -86,6 +86,35 @@
   background-color: #ef9494;
 }
 
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff; 
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.AI_btn_disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (min-width: 768px) {
   .modal_content img {
     content: url("/icons/input_modal_pc.svg");
@@ -110,9 +139,9 @@
     font-size: 1.1vw;
   }
 
-.contact_message_error {
-  font-size: 0.8vw;
-}
+  .contact_message_error {
+    font-size: 0.8vw;
+  }
 
   .add_btn {
     display: flex;
