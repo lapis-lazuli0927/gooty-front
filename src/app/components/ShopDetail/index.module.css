@@ -36,6 +36,15 @@
   justify-content: center;
 }
 
+.instagram_link {
+  display: inline-flex;
+}
+
+.instagram_link:hover {
+  cursor: pointer;
+  opacity: 0.7; 
+}
+
 .shop_info {
   font-size: 14px;
   color: #fff;

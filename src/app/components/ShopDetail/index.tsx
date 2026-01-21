@@ -28,18 +28,36 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
         </div>
         <div className={styles.shop_line}></div>
         <div className={styles.shop_Instagram_icon}>
-          <Image
-            src={
-              shop.is_instagram
-                ? "/icons/shop_Instagram_icon_show.svg"
-                : "/icons/shop_non_Instagram_icon.svg"
-            }
-            alt={shop.is_instagram ? "Instagramあり" : "Instagramなし"}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "auto", height: "auto" }}
-          />
+          {shop.url ? (
+            <a
+              href={shop.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.instagram_link}
+            >
+              <Image
+                src={
+                  shop.is_instagram
+                    ? "/icons/shop_Instagram_icon_show.svg"
+                    : "/icons/shop_non_Instagram_icon.svg"
+                }
+                alt={shop.is_instagram ? "Instagramあり" : "Instagramなし"}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "auto", height: "auto" }}
+              />
+            </a>
+          ) : (
+            <Image
+              src="/icons/shop_non_Instagram_icon.svg"
+              alt="Instagramなし"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "auto", height: "auto" }}
+            />
+          )}
         </div>
       </div>
       <div className={styles.shop_info}>
