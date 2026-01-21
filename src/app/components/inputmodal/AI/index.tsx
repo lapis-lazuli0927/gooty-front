@@ -27,13 +27,6 @@ export default function AI({ onBack, onClose }: AIProps) {
       return;
     }
 
-    if (url.includes("ai")) {
-      setErrorMessage(
-        "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
-      );
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -57,7 +50,7 @@ export default function AI({ onBack, onClose }: AIProps) {
           onClose();
         }
       }
-    } catch (error) {
+    } catch {
       setErrorMessage(
         "AI自動抽出に失敗しました。別のURLを入力もしくは手動入力をしてください。"
       );
