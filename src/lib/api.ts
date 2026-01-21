@@ -13,25 +13,6 @@ console.log("NEXT_PUBLIC_API_BASE_URL:", process.env.NEXT_PUBLIC_API_BASE_URL);
 // 2. 型定義 (Interfaces)
 // ==========================================
 
-/** DemoShop関連の型 */
-export interface DemoShop {
-  id: number;
-  name: string;
-  type: number;
-  station: string;
-  review_level: number;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface DemoShopsResponse {
-  data: DemoShop[];
-}
-
-export interface DemoShopResponse {
-  data: DemoShop;
-}
-
 /** Shops関連の型 */
 export interface Shops {
   id: number;
@@ -85,44 +66,9 @@ export interface CreateResponse {
   success: boolean;
 }
 
-/** Stardust関連の型 */
-export interface Stardust {
-  id: number;
-  value: number;
-  memo: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface StardustsResponse {
-  data: Stardust[];
-}
-
 // ==========================================
 // 3. API実行関数 (Functions)
 // ==========================================
-
-/**
- * 全デモ店舗一覧を取得
- */
-export async function fetchDemoShops(): Promise<DemoShopsResponse> {
-  const response = await fetch(`${API_BASE_URL}/demo_shops`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch demo shops");
-  }
-  return response.json();
-}
-
-/**
- * 特定のデモ店舗を取得
- */
-export async function fetchDemoShop(id: number): Promise<DemoShopResponse> {
-  const response = await fetch(`${API_BASE_URL}/demo_shops/${id}`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch demo shop");
-  }
-  return response.json();
-}
 
 /**
  * 全店舗一覧を取得
@@ -142,16 +88,8 @@ export async function fetchShops(
 }
 
 /**
- * 全stardusts一覧を取得
+ * 特定の店舗情報を取得
  */
-export async function fetchStardusts(): Promise<StardustsResponse> {
-  const response = await fetch(`${API_BASE_URL}/stardusts`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch stardusts");
-  }
-  return response.json();
-}
-
 export async function fetchShop(id: string): Promise<ShopResponse> {
   const response = await fetch(`${API_BASE_URL}/shops/${id}`);
   if (!response.ok) {
@@ -159,6 +97,7 @@ export async function fetchShop(id: string): Promise<ShopResponse> {
   }
   return response.json();
 }
+
 /**
  * お店の新規登録
  */

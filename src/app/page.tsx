@@ -21,17 +21,6 @@ export default function Home() {
     }
   };
 
-  const handleNavigateToIndex = () => {
-    router.push('/index');
-  };
-
-  const handleNavigateToDemoShops = () => {
-    router.push('/demo_shops');
-  };
-
-  const handleNavigateToStardusts = () => {
-    router.push('/stardusts');
-  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -49,26 +38,6 @@ export default function Home() {
             {isLoading ? 'Checking...' : 'Check API Health'}
           </button>
           
-          <button
-            onClick={handleNavigateToIndex}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors"
-          >
-            Go to /index
-          </button>
-          
-          <button
-            onClick={handleNavigateToDemoShops}
-            className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-colors"
-          >
-            Go to Demo Shops
-          </button>
-          
-          <button
-            onClick={handleNavigateToStardusts}
-            className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded transition-colors"
-          >
-            Go to Stardusts
-          </button>
           
           {apiStatus && (
             <div className="p-4 bg-gray-50 rounded border">
