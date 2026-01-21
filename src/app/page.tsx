@@ -1,12 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [apiStatus, setApiStatus] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const checkApiHealth = async () => {
     setIsLoading(true);
