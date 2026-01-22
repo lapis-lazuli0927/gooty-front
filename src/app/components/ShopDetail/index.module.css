@@ -5,7 +5,7 @@
   flex: 1;
   min-height: 0;
   justify-content: space-around;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -141,11 +141,11 @@
 }
 
 .edit_btn_icon {
-  margin-left: 16vw;
+  margin-left: 10vw;
 }
 
 .trash_btn_icon {
-  margin-right: 16vw;
+  margin-right: 10vw;
 }
 
 .edit_btn_icon:hover {
