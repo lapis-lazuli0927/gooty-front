@@ -6,6 +6,29 @@ interface ShopCardProps {
   shop: Shops;
 }
 
+const truncateText = (text: string, maxWeight: number) => {
+  if (!text) return "";
+
+  let currentWeight = 0;
+  let result = "";
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    // 半角（ASCII文字など）なら1、それ以外（全角）なら2を加算
+    // ※正規表現で半角文字を判定
+    const isHalfWidth = char.match(/[ -~]/); 
+    currentWeight += isHalfWidth ? 1 : 2;
+
+    if (currentWeight <= maxWeight) {
+      result += char;
+    } else {
+      return result + "...";
+    }
+  }
+
+  return result;
+};
+
 export default function ShopCard({ shop }: ShopCardProps) {
   const currentLevel = shop.review !== null ? shop.review : 0;
   const MAX_STARS = 5;
@@ -42,7 +65,9 @@ export default function ShopCard({ shop }: ShopCardProps) {
             </div>
           )}
           <div className={styles.shop_name}>
-            <p className={styles.shop_text}>{shop.name}</p>
+            <p className={styles.shop_text}>
+              {truncateText(shop.name, 18)}
+            </p>
             <div className={styles.shop_train}>
               <Image
                 className={styles.shop_train_icon}
@@ -54,7 +79,7 @@ export default function ShopCard({ shop }: ShopCardProps) {
                 style={{ width: "auto", height: "auto" }}
               />
               <p className={styles.shop_train_text}>
-                {shop.station_name ?? "駅情報未登録"}
+                {truncateText(shop.station_name ?? "駅情報未登録", 30)}
               </p>
             </div>
           </div>
