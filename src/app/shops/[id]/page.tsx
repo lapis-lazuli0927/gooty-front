@@ -6,6 +6,7 @@ import { fetchShop, Shop } from "@/lib/api";
 import styles from "./page.module.css";
 import GlobalError from "@/app/components/GlobalError";
 import ShopDetail from "@/app/components/ShopDetail";
+import Header from "@/app/components/Header";
 
 export default function ShopsPage() {
   const [shop, setShop] = useState<Shop | null>(null);
@@ -38,9 +39,7 @@ export default function ShopsPage() {
   return (
     <div className={styles.show_body}>
       <div className={styles.header_container}>
-        <div className={styles.header}>
-          <h1 className={styles.header_logo}>Gooty</h1>
-        </div>
+       <Header />
       </div>
       <ShopDetail shop={shop} />
     </div>
