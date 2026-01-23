@@ -16,7 +16,7 @@ const truncateText = (text: string, maxWeight: number) => {
     const char = text[i];
     // 半角（ASCII文字など）なら1、それ以外（全角）なら2を加算
     // ※正規表現で半角文字を判定
-    const isHalfWidth = char.match(/[ -~]/); 
+    const isHalfWidth = char.match(/[ -~]/);
     currentWeight += isHalfWidth ? 1 : 2;
 
     if (currentWeight <= maxWeight) {
@@ -64,46 +64,49 @@ export default function ShopCard({ shop }: ShopCardProps) {
               />
             </div>
           )}
-          <div className={styles.shop_name}>
-            <p className={styles.shop_text}>
-              {truncateText(shop.name, 18)}
-            </p>
-            <div className={styles.shop_train}>
-              <Image
-                className={styles.shop_train_icon}
-                src="/icons/shop_train_icon.svg"
-                alt="電車アイコン"
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: "auto", height: "auto" }}
-              />
-              <p className={styles.shop_train_text}>
-                {truncateText(shop.station_name ?? "駅情報未登録", 30)}
-              </p>
-            </div>
-          </div>
-          <div className={styles.review}>
-            {[...Array(MAX_STARS)].map((_, index) => {
-              const starNumber = index + 1;
-              const isFilled = starNumber <= currentLevel;
 
-              return (
+          <div className={styles.name_train_review}>
+            <p className={styles.shop_text}>{truncateText(shop.name, 15)}</p>
+
+            <div className={styles.train_review}>
+              <div className={styles.shop_train}>
                 <Image
-                  key={index}
-                  className={styles.review_icon}
-                  src={
-                    isFilled
-                      ? "/icons/review_star.svg"
-                      : "/icons/review_star_empty.svg"
-                  }
-                  alt={`評価星 ${starNumber} (${isFilled ? "満点" : "空"})`}
+                  className={styles.shop_train_icon}
+                  src="/icons/shop_train_icon.svg"
+                  alt="電車アイコン"
                   width={0}
                   height={0}
                   sizes="100vw"
+                  style={{ width: "auto", height: "auto" }}
                 />
-              );
-            })}
+                <p className={styles.shop_train_text}>
+                  {truncateText(shop.station_name ?? "駅情報未登録", 30)}
+                </p>
+              </div>
+
+              <div className={styles.review}>
+                {[...Array(MAX_STARS)].map((_, index) => {
+                  const starNumber = index + 1;
+                  const isFilled = starNumber <= currentLevel;
+
+                  return (
+                    <Image
+                      key={index}
+                      className={styles.review_icon}
+                      src={
+                        isFilled
+                          ? "/icons/review_star.svg"
+                          : "/icons/review_star_empty.svg"
+                      }
+                      alt={`評価星 ${starNumber} (${isFilled ? "満点" : "空"})`}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                    />
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

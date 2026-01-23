@@ -47,10 +47,12 @@
   margin: 12px 0 0 24px;
 }
 
-.shop_name {
+.name_train_review {
+  margin: 0 0 0 18px;
   display: flex;
   flex-flow: column;
-  margin: 9px 0 0 18px;
+  justify-content: space-around;
+  flex: 1;
 }
 
 .shop_text {
@@ -79,12 +81,15 @@
 .review {
   display: flex;
   margin-left: auto;
-  margin-top: 42px;
-  margin-right: 1.99vw;
 }
 
 .review_icon {
   width: 19px;
   height: 19px;
   margin-right: 3px;
+}
+
+.train_review {
+  display: flex;
+  align-items: center;
 }
