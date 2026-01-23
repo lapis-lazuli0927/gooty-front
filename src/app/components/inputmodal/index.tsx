@@ -14,7 +14,7 @@ export default function InputModal({ close }: InputModalProps) {
   const router = useRouter();
   const [isAiView, setIsAiView] = useState(false);
   const handleManualRegister = () => {
-    router.push("/create");
+    router.push("/shops/create");
   };
   return (
     <div className={styles.modal} onClick={close}>

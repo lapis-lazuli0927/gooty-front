@@ -170,10 +170,12 @@
 
 .edit_btn_icon {
   margin-left: 10vw;
+  filter: drop-shadow(0px 0px 8px #aaa);
 }
 
 .trash_btn_icon {
   margin-right: 10vw;
+  filter: drop-shadow(0px 0px 8px #aaa);
 }
 
 .edit_btn_icon:hover {
@@ -215,7 +217,7 @@
   }
 
   .shop_info {
-    font-size: 10px;
+    font-size: 14px;
     margin-left: 57px;
     margin-top: 0;
   }
