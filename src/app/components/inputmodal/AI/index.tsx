@@ -72,7 +72,7 @@ export default function AI({ onBack, onClose }: AIProps) {
       <div className={styles.modal_text_btn}>
         <h2>お店の新規登録</h2>
         <div className={styles.modal_text}>
-          <p>InstagramのURLを入力してください</p>
+          <p>InstagramのURLを入力してください<br /> <span className={styles.text_span}>この登録には10秒以上かかる場合があります。</span> </p>
           <input
             type="text"
             placeholder="ここにInstagramのURLをペースト(https://www.instagram.com/...)"
