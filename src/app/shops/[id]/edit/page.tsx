@@ -230,8 +230,8 @@ export default function Edit() {
                 const starValue = index + 1;
                 const icon =
                   starValue <= shopData.review
-                    ? "/icons/star_icon_full.svg"
-                    : "/icons/star_icon_none.svg";
+                    ? "/icons/review_star_show.svg"
+                    : "/icons/review_star_show_empty.svg";
                 return (
                   <Image
                     key={index}
