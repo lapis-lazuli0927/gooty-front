@@ -53,12 +53,17 @@
   flex-flow: column;
   justify-content: space-around;
   flex: 1;
+  min-width: 0;
 }
 
 .shop_text {
   font-size: 20px;
   font-weight: 500;
   color: #545454;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 72vw;
 }
 
 .shop_train {
@@ -76,6 +81,10 @@
   font-size: 9px;
   font-weight: 500;
   color: #545454;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 35vw;
 }
 
 .review {
@@ -92,4 +101,16 @@
 .train_review {
   display: flex;
   align-items: center;
+}
+
+@media (min-width: 768px) {
+  .shop_text {
+    max-width: 100%;
+    width: 24vw;
+  }
+
+  .shop_train_text {
+    max-width: 100%;
+    width: 15vw;
+  }
 }
