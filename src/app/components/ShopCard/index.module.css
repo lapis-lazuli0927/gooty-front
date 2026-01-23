@@ -90,12 +90,12 @@
 .review {
   display: flex;
   margin-left: auto;
+  gap: 3px;
 }
 
 .review_icon {
   width: 19px;
   height: 19px;
-  margin-right: 3px;
 }
 
 .train_review {

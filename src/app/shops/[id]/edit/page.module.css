@@ -114,11 +114,11 @@
   justify-content: center;
   width: 49.25vw;
   margin: 0 auto;
+  gap: 10px;
 }
 
 .stars img {
   width: 9vw;
-  margin-right: 10px;
 }
 
 /* 保存ボタン */
