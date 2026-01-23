@@ -9,13 +9,5 @@
 
 .header_container {
   width: 100%;
-  padding: 10px 10px 0 10px;
   box-sizing: border-box;
 }
-
-.header_logo {
-  font-family: "Abril Fatface", serif;
-  color: #fff;
-  font-size: 40px;
-}
-
