@@ -8,6 +8,7 @@ import ShopCard from "@/app/components/ShopCard";
 import ShopDetail from "@/app/components/ShopDetail";
 import InputModal from "@/app/components/inputmodal";
 import styles from "./page.module.css";
+import Header from "@/app/components/Header";
 
 function ShopsContent() {
   const searchParams = useSearchParams();
@@ -100,9 +101,7 @@ function ShopsContent() {
       {error && <div className={styles.error_message}>{error}</div>}
       {isModalOpen && <InputModal close={closeModal} />}
       <div className={styles.header_container}>
-        <div className={styles.header}>
-          <h1 className={styles.header_logo}>Gooty</h1>
-        </div>
+        <Header />
         <div className={styles.sort} style={{ cursor: "pointer" }}>
           <p className={styles.sort_text} onClick={handleSortTypeChange}>
             {label}
