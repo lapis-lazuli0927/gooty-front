@@ -12,6 +12,7 @@ import { useRouter, useParams } from "next/navigation";
 import { updateShop, fetchShop } from "@/lib/api";
 import styles from "./page.module.css";
 import GlobalError from "@/app/components/GlobalError";
+import Header from "@/app/components/Header";
 
 const MAX_STARS = 5;
 
@@ -109,9 +110,7 @@ export default function Edit() {
   return (
     <div className={styles.new_shop_page_container}>
       <GlobalError message={error} />
-      <div className={styles.header}>
-        <h1>Gooty</h1>
-      </div>
+      <Header />
       <form
         className={styles.form_container}
         onSubmit={handleSubmit}
@@ -230,8 +229,8 @@ export default function Edit() {
                 const starValue = index + 1;
                 const icon =
                   starValue <= shopData.review
-                    ? "/icons/star_icon_full.svg"
-                    : "/icons/star_icon_none.svg";
+                    ? "/icons/review_star_show.svg"
+                    : "/icons/review_star_show_empty.svg";
                 return (
                   <Image
                     key={index}

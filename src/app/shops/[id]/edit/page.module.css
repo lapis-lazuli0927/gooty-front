@@ -1,16 +1,8 @@
 .header {
   width: 100%;
-  padding: 16px 0 0 16px;
   box-sizing: border-box;
 }
 
-.header h1 {
-  font-family: "Abril Fatface", serif;
-  color: #fff;
-  font-size: 40px;
-  margin-top: 18px;
-  font-weight: normal;
-}
 .new_shop_page_container {
   box-sizing: inherit;
   width: 100%;
@@ -72,6 +64,7 @@
 
 .required_mobile {
   display: inline-block;
+  margin: 0 0 5px 5px;
 }
 
 .required_pc {
@@ -114,6 +107,7 @@
   justify-content: center;
   width: 49.25vw;
   margin: 0 auto;
+  gap: 10px;
 }
 
 .stars img {

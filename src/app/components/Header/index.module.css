@@ -1,0 +1,11 @@
+.header_logo {
+  padding: 10px 10px 0 10px;
+  font-family: "Abril Fatface", serif;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.header_logo:hover {
+  opacity: 0.8;
+}

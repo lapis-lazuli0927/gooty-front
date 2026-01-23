@@ -65,12 +65,6 @@
   color: #3f3f3f;
 }
 
-.modal_content span {
-  font-size: 1.99vw;
-  font-weight: 500;
-  color: #3f3f3f;
-}
-
 .btn_area {
   display: flex;
   flex-direction: row;
