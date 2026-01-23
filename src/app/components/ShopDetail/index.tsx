@@ -19,34 +19,12 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
   const handleEditClick = () => {
     router.push(`/shops/${shop.id}/edit`);
   };
-  const truncateText = (text: string, maxWeight: number) => {
-  if (!text) return "";
-
-  let currentWeight = 0;
-  let result = "";
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    // 半角（ASCII文字など）なら1、それ以外（全角）なら2を加算
-    // ※正規表現で半角文字を判定
-    const isHalfWidth = char.match(/[ -~]/); 
-    currentWeight += isHalfWidth ? 1 : 2;
-
-    if (currentWeight <= maxWeight) {
-      result += char;
-    } else {
-      return result + "...";
-    }
-  }
-
-  return result;
-};
 
   return (
     <div className={styles.show_body}>
       <div className={styles.shop_title}>
         <div className={styles.shop_name}>
-          <p>{truncateText(shop.name, 18)}</p>
+          <p>{shop.name}</p>
         </div>
         <div className={styles.shop_line}></div>
         <div className={styles.shop_Instagram_icon}>

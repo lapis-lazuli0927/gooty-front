@@ -17,10 +17,18 @@
 }
 
 .shop_name {
+  margin-bottom: 17px;
+  width: 78vw;
+}
+
+.shop_name p {
   font-size: 32px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .shop_line {
@@ -42,19 +50,25 @@
 
 .instagram_link:hover {
   cursor: pointer;
-  opacity: 0.7; 
+  opacity: 0.7;
 }
 
 .shop_info {
   font-size: 14px;
   color: #fff;
   font-weight: 600;
-  margin-top: 13px;
   margin-left: 57px;
 }
 
 .train {
   display: flex;
+}
+
+.train p {
+  width: 60vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .train_icon {
@@ -66,6 +80,13 @@
   margin-top: 3px;
 }
 
+.map p {
+  width: 60vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .map_icon {
   margin-right: 11px;
 }
@@ -73,6 +94,13 @@
 .phone {
   display: flex;
   margin-top: 3px;
+}
+
+.phone p {
+  width: 60vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .phone_icon {
@@ -84,7 +112,6 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  margin-top: 15px;
 }
 
 .memo_border_left {
@@ -116,7 +143,7 @@
 .memo_text p {
   width: 85.82vw;
   height: auto;
-  max-height: 180px;
+  max-height: 25vh;
   overflow-y: auto;
   margin: 0 auto;
 }
@@ -169,6 +196,10 @@
   }
 
   .shop_name {
+    width: 25vw;
+  }
+
+  .shop_name p {
     font-size: 20px;
   }
 
@@ -194,6 +225,10 @@
     height: 50%;
   }
 
+  .train p {
+    width: 19vw;
+  }
+
   .map {
     margin-top: 1.5px;
   }
@@ -204,6 +239,10 @@
     height: 50%;
   }
 
+  .map p {
+    width: 19vw;
+  }
+
   .phone {
     margin-top: 1.5px;
   }
@@ -212,6 +251,10 @@
     margin-right: 11px;
     width: 50%;
     height: 50%;
+  }
+
+  .phone p {
+    width: 19vw;
   }
 
   .memo {
@@ -230,15 +273,15 @@
     font-size: 11px;
     width: 100%;
     margin-top: 2px;
+    max-height: 100%;
   }
 
   .memo_text p {
     width: 80%;
     height: auto;
-    min-height: 130px;
-    max-height: 300px;
     overflow-y: auto;
     margin: 0 auto;
+    max-height: 15vh;
   }
 
   .review p {
