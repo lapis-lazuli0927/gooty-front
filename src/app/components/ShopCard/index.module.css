@@ -12,6 +12,12 @@
   transform: scale(1.04);
 }
 
+.selected {
+  border: 4px solid #FFB564;
+  border-radius: 6px;
+  transform: scale(1.02);
+}
+
 .shop_accent_border {
   width: 6px;
   height: 69px;

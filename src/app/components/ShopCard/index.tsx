@@ -4,13 +4,14 @@ import styles from "./index.module.css";
 
 interface ShopCardProps {
   shop: Shops;
+  isSelected: boolean;
 }
 
-export default function ShopCard({ shop }: ShopCardProps) {
+export default function ShopCard({ shop, isSelected }: ShopCardProps) {
   const currentLevel = shop.review !== null ? shop.review : 0;
   const MAX_STARS = 5;
   return (
-    <div className={styles.shop_card}>
+    <div className={`${styles.shop_card} ${isSelected ? styles.selected : ""}`}>
       <div className={styles.shop_content}>
         {shop.is_ai_generated ? (
           <div className={styles.shop_accent_border}></div>
