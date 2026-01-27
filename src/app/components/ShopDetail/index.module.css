@@ -50,7 +50,8 @@
 
 .instagram_link:hover {
   cursor: pointer;
-  opacity: 0.7;
+  transform: scale(1.18);
+  filter: brightness(120%);
 }
 
 .shop_info {
@@ -89,6 +90,11 @@
 
 .map_icon {
   margin-right: 11px;
+}
+
+.map_icon:hover {
+  cursor: pointer;
+  transform: scale(1.9);
 }
 
 .phone {
@@ -159,7 +165,6 @@
 .review_star {
   display: flex;
   justify-content: center;
-  margin-top: 1px;
   gap: 10px;
 }
 
@@ -179,11 +184,13 @@
 }
 
 .edit_btn_icon:hover {
-  opacity: 0.7;
+  cursor: pointer;
+  transform: scale(1.2);
 }
 
 .trash_btn_icon:hover {
-  opacity: 0.7;
+  cursor: pointer;
+  transform: scale(1.2);
 }
 
 @media (min-width: 768px) {
@@ -191,7 +198,7 @@
     height: 100%;
     justify-content: space-between;
     overflow: hidden;
-    padding: 0 20px 0 20px;
+    padding: 0 20px 10px 20px;
   }
 
   .shop_title {

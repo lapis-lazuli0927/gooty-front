@@ -29,6 +29,10 @@
   font-weight: 300;
 }
 
+.sort_text:hover {
+  transform: scale(1.4);
+}
+
 .sort_image {
   width: 17px;
   height: 17px;
@@ -76,7 +80,8 @@
 }
 
 .add_shop_btn:hover {
-  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 /* PC用のスタイル（768px以上） */
