@@ -127,7 +127,10 @@ function ShopsContent() {
         <div className={styles.shop_card_container}>
           {shops.map((shop) => (
             <div key={shop.id} onClick={() => handleCardClick(shop.id)}>
-              <ShopCard shop={shop} />
+              <ShopCard
+                shop={shop}
+                isSelected={selectedShopId === shop.id}
+              />
             </div>
           ))}
         </div>

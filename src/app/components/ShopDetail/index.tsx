@@ -19,6 +19,15 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
   const handleEditClick = () => {
     router.push(`/shops/${shop.id}/edit`);
   };
+  const handleMapClick = () => {
+    if (shop.address) {
+      const searchQuery = `${shop.name} ${shop.address}`;
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        searchQuery
+      )}`;
+      window.open(url, "_blank", "noreferrer");
+    }
+  };
 
   return (
     <div className={styles.show_body}>
@@ -82,6 +91,7 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             height={0}
             sizes="100vw"
             style={{ width: "auto", height: "auto" }}
+            onClick={handleMapClick}
           />
           <p>{shop.address || "住所未登録"}</p>
         </div>
