@@ -5,6 +5,11 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.31);
 }
 
+.shop_card:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+}
+
 .shop_accent_border {
   width: 6px;
   height: 69px;
